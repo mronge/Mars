@@ -40,6 +40,11 @@
     return YES;
 }
 
+- (void)close {
+    sqlite3_close(_dbHandle);
+    _dbHandle = NULL;
+}
+
 - (BOOL)exec:(NSString *)sql error:(NSError **)error {
     const char *charSql = [sql cStringUsingEncoding:NSUTF8StringEncoding];
     char *errorPointer;
@@ -52,6 +57,80 @@
         return NO;
     }
     return YES;
+}
+- (int64_t)executeUpdate:(MQuery *)query error:(NSError **)error {
+    if ([query isKindOfClass:[MSelectQuery class]]) {
+        [NSException raise:@"Invalid Query Type" format:@"Only UPDATE, DELETE, INSERT queries are allowed"];
+    }
+    
+    sqlite3_stmt *stmt = [self createStatement:query.sql bindings:query.bindings error:error];
+    if (!stmt) {
+        return kNoPk;
+    }
+    int64_t row = [self executeUpdateWithStatement:stmt error:error];
+    [self finalizeStatement:stmt];
+    return row;
+}
+
+- (NSArray *)executeQuery:(MQuery *)query error:(NSError **)error {
+    if (![query isKindOfClass:[MSelectQuery class]]) {
+        [NSException raise:@"Invalid Query Type" format:@"Only SELECT queries are allowed"];
+    }
+    sqlite3_stmt *stmt = [self createStatement:query.sql bindings:query.bindings error:error];
+    if (!stmt) {
+        return nil;
+    }
+    NSArray *results = [self executeQueryWithStatement:stmt error:error];
+    [self finalizeStatement:stmt];
+    return results;
+}
+
+- (sqlite3 *)dbHandle {
+    return _dbHandle;
+}
+
+- (NSError *)lastError {
+    NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+    [errorDetail setValue:[self lastErrorMessage] forKey:NSLocalizedDescriptionKey];
+    return [NSError errorWithDomain:@"MDatabase" code:[self lastErrorCode] userInfo:errorDetail];
+}
+
+- (NSString *)lastErrorMessage {
+    return [NSString stringWithUTF8String:sqlite3_errmsg(_dbHandle)];
+}
+
+- (int)lastErrorCode {
+    return sqlite3_errcode(_dbHandle);
+}
+
+- (void)configureDatabaseSettings {
+    [self exec:@"PRAGMA foreign_keys = ON;" error:nil];
+    [self exec:@"PRAGMA synchronous = OFF;" error:nil];
+    [self exec:@"PRAGMA journal_mode = WAL;" error:nil];
+}
+
+- (NSArray *)executeQueryWithStatement:(sqlite3_stmt *)stmt error:(NSError **)error {
+    int r = 0;
+    NSMutableArray *results = [NSMutableArray array];
+    NSArray *columnNames = [self columnsForStatement:stmt];
+    
+    while ((r = sqlite3_step(stmt)) != SQLITE_DONE) {
+        if (r == SQLITE_ROW) {
+            NSDictionary *columns = [NSMutableDictionary dictionary];
+            int i = 0;
+            for (NSString *columnName in columnNames) {
+                [columns setValue:[self valueForColumn:i query:stmt] forKey:columnName];
+                ++i;
+            }
+            [results addObject:columns];
+        } else {
+            CTLog(@"Error calling sqlite3_step %@", self.lastError);
+            if (error) {
+                *error = self.lastError;
+            }
+        }
+    }
+    return results;
 }
 
 - (int64_t)executeUpdateWithStatement:(sqlite3_stmt *)stmt error:(NSError **)error {
@@ -111,6 +190,49 @@
     }
 }
 
+// Take from DatabaseKit
+- (id)valueForColumn:(unsigned int)colIndex query:(sqlite3_stmt *)query {
+    int columnType = sqlite3_column_type(query, colIndex);
+    switch (columnType) {
+        case SQLITE_INTEGER:
+            return @(sqlite3_column_int(query, colIndex));
+            break;
+        case SQLITE_FLOAT:
+            return @(sqlite3_column_double(query, colIndex));
+            break;
+        case SQLITE_BLOB:
+            return [NSData dataWithBytes:sqlite3_column_blob(query, colIndex)
+                                  length:sqlite3_column_bytes(query, colIndex)];
+            break;
+        case SQLITE_NULL:
+            return [NSNull null];
+            break;
+        case SQLITE_TEXT:
+            return @((const char *)sqlite3_column_text(query, colIndex));
+            break;
+        default:
+            // It really shouldn't ever come to this.
+            break;
+    }
+    return nil;
+}
+
+// Taken from DatabaseKit
+- (NSArray *)columnsForStatement:(sqlite3_stmt *)query {
+    int columnCount = sqlite3_column_count(query);
+    if (columnCount <= 0) {
+        return nil;
+    }
+    
+    NSMutableArray *columnNames = [NSMutableArray array];
+    for (int i = 0; i < columnCount; ++i) {
+        const char *name;
+        name = sqlite3_column_name(query, i);
+        [columnNames addObject:@(name)];
+    }
+    return columnNames;
+}
+
 - (sqlite3_stmt *)createStatement:(NSString *)sql bindings:(NSArray *)bindings error:(NSError **)error {
     sqlite3_stmt *stmt;
     int rc = sqlite3_prepare_v2(self.dbHandle, [sql UTF8String], -1, &stmt, 0);
@@ -131,48 +253,6 @@
 - (void)finalizeStatement:(sqlite3_stmt *)stmt {
     sqlite3_finalize(stmt);
 }
-
-- (int64_t)executeUpdate:(MQuery *)query error:(NSError **)error {
-    sqlite3_stmt *stmt = [self createStatement:query.sql bindings:query.bindings error:error];
-    if (!stmt) {
-        return kNoPk;
-    }
-    int64_t row = [self executeUpdateWithStatement:stmt error:error];
-    [self finalizeStatement:stmt];
-    return row;
-}
-
-- (MResults *)executeQuery:(MQuery *)query error:(NSError **)error {
-    if (![query isKindOfClass:[MSelectQuery class]]) {
-        [NSException raise:@"Invalid Query Type" format:@"Only SELECT queries are allowed"];
-    }
-    return nil;
-}
-
-- (void)configureDatabaseSettings {
-    [self exec:@"PRAGMA foreign_keys = ON;" error:nil];
-    [self exec:@"PRAGMA synchronous = OFF;" error:nil];
-    [self exec:@"PRAGMA journal_mode = WAL;" error:nil];
-}
-
-- (sqlite3 *)dbHandle {
-    return _dbHandle;
-}
-
-- (NSError *)lastError {
-    NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
-    [errorDetail setValue:[self lastErrorMessage] forKey:NSLocalizedDescriptionKey];
-    return [NSError errorWithDomain:@"CTDatabase" code:[self lastErrorCode] userInfo:errorDetail];
-}
-
-- (NSString *)lastErrorMessage {
-    return [NSString stringWithUTF8String:sqlite3_errmsg(_dbHandle)];
-}
-
-- (int)lastErrorCode {
-    return sqlite3_errcode(_dbHandle);
-}
-
 
 
 @end
