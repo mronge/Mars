@@ -8,6 +8,8 @@
 
 #import "MDatabase.h"
 #import "MConnection.h"
+#import "MQuery.h"
+#import "MInsertQuery.h"
 
 #import <sqlite3.h>
 
@@ -27,7 +29,7 @@
         _writeQueue = [[NSOperationQueue alloc] init];
         _writeQueue.maxConcurrentOperationCount = 1;
         _readQueue = [[NSOperationQueue alloc] init];
-        _lockQueue = dispatch_queue_create("CTDatabaseLock", NULL);
+        _lockQueue = dispatch_queue_create("MDatabaseLock", NULL);
         
         _readers = [[NSMutableSet alloc] init];
         
@@ -62,42 +64,46 @@
     return [self initWithPath:fullDBPath schema:schema];
 }
 
-- (NSOperation *)select:(id)rows from:(id)tables where:(id)expression groupBy:(id)groupBy
-                orderBy:(id)orderBy limit:(unsigned int)limit offset:(unsigned int)offset
-        completionBlock:(void (^)(NSError *err, NSArray *results))completionBlock {
-    return nil;
+- (NSOperation *)query:(MQuery *)query completionBlock:(void (^)(NSError *err, id result))completionBlock {
+    if ([query modifies]) {
+        return [self change:query completionBlock:completionBlock];
+    } else {
+        return [self select:query completionBlock:completionBlock];
+    }
 }
 
-- (NSOperation *)select:(id)rows from:(id)tables where:(id)expression
-        completionBlock:(void (^)(NSError *err, NSArray *results))completionBlock {
-    return nil;
-}
-
-- (NSOperation *)insert:(NSString *)table fields:(NSDictionary *)fields
-        completionBlock:(void (^)(NSError *err, int64_t row))completionBlock {
+- (NSOperation *)select:(MQuery *)query completionBlock:(void (^)(NSError *err, id result))completionBlock {
     NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
-//        NSError *error = nil;
-//        sqlite3_stmt *stmt = [_writer.sql statementForInsert:table fields:fields error:&error];
-//        if (stmt) {
-//            int64_t row = [_writer executeUpdate:stmt error:&error];
-//            sqlite3_finalize(stmt);
-//            completionBlock(error, row);
-//        } else {
-//            completionBlock(error, kCTNoPk);
-//        }
+        MConnection *reader = [self reader];
+        NSError *error = nil;
+        NSArray *val = [reader executeQuery:query error:&error];
+        if (val) {
+            completionBlock(nil, val);
+        } else {
+            completionBlock(error, nil);
+        }
+        [self putBackReader:reader];
     }];
-    [_writeQueue addOperation:op];
+    [_readQueue addOperation:op];
     return op;
 }
 
-- (NSOperation *)update:(NSString *)table fields:(NSDictionary *)fields where:(id)expression
-        completionBlock:(void (^)(NSError *err))completionBlock {
-    return nil;
-}
-
-- (NSOperation *)deleteFrom:(NSString *)table where:(id)expression
-            completionBlock:(void (^)(NSError *err))completionBlock {
-    return nil;
+- (NSOperation *)change:(MQuery *)query completionBlock:(void (^)(NSError *err, id result))completionBlock {
+    NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
+        NSError *error = nil;
+        BOOL success = [_writer executeUpdate:query error:&error];
+        if (success) {
+            id val = nil;
+            if ([query isKindOfClass:[MInsertQuery class]]) {
+                val = @([_writer lastInsertRowId]);
+            }
+            completionBlock(nil, val);
+        } else {
+            completionBlock(error, nil);
+        }
+    }];
+    [_writeQueue addOperation:op];
+    return op;
 }
 
 - (MConnection *)reader {

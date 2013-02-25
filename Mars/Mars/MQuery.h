@@ -18,4 +18,5 @@
 
 - (NSString *)sql;
 - (NSArray *)bindings;
+- (BOOL)modifies;
 @end

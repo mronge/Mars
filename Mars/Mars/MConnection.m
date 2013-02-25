@@ -89,6 +89,10 @@
     return _dbHandle;
 }
 
+- (int64_t)lastInsertRowId {
+    return sqlite3_last_insert_rowid(_dbHandle);
+}
+
 - (NSError *)lastError {
     NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
     [errorDetail setValue:[self lastErrorMessage] forKey:NSLocalizedDescriptionKey];
@@ -133,7 +137,7 @@
     return results;
 }
 
-- (int64_t)executeUpdateWithStatement:(sqlite3_stmt *)stmt error:(NSError **)error {
+- (BOOL)executeUpdateWithStatement:(sqlite3_stmt *)stmt error:(NSError **)error {
     int rc = sqlite3_step(stmt);
     
     if (SQLITE_DONE == rc) {
@@ -143,15 +147,16 @@
         if (error) {
             *error = self.lastError;
         }
-        return kNoPk;
+        return NO;
     }
     
     if (rc == SQLITE_ROW) {
         NSAssert(NO, @"A executeUpdate is being called with a query string");
     }
     
-    return sqlite3_last_insert_rowid(_dbHandle);
+    return NO;
 }
+
 
 // Taken from FMDB
 - (void)bindObject:(id)obj toColumn:(int)idx inStatement:(sqlite3_stmt *)pStmt {

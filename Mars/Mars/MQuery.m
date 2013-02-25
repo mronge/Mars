@@ -76,6 +76,10 @@ static NSArray *ExpandToArray(id obj) {
     return bindings;
 }
 
+- (BOOL)modifies {
+    return YES;
+}
+
 - (NSString *)whereString {
     NSMutableArray *whereExprs = [NSMutableArray array];
     for (NSString *column in [self.where sortedKeys]) {

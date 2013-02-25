@@ -22,8 +22,9 @@
     [_conn exec:@"CREATE TABLE \"emails\" (\"name\" TEXT, \"email\" TEXT, \"count\" INTEGER);" error:nil];
     
     MQuery *insert = [MQuery insertInto:@"emails" values:@{@"name":@"Matt", @"email":@"matt@gmail.com", @"count":@(3)}];
-    int64_t row = [_conn executeUpdate:insert error:nil];
-    STAssertTrue(row != -1, nil);
+    BOOL r = [_conn executeUpdate:insert error:nil];
+    STAssertTrue(r, nil);
+    STAssertTrue([_conn lastInsertRowId] == 1, nil);
 }
 
 - (void)tearDown {
@@ -44,6 +45,17 @@
     NSArray *results = [_conn executeQuery:query error:nil];
     STAssertTrue(results.count > 0, nil);
     STAssertEqualObjects(@(1), results[0][@"COUNT(*)"], nil);
+}
+
+- (void)testDeleteCount {
+    MQuery *query = [[MQuery deleteFrom:@"emails"] where:@{@"name":@"Matt"}];
+    BOOL r = [_conn executeUpdate:query error:nil];
+    STAssertTrue(r, nil);
+    
+    query = [MQuery select:@"COUNT(*)" from:@"emails"];
+    NSArray *results = [_conn executeQuery:query error:nil];
+    STAssertTrue(results.count > 0, nil);
+    STAssertEqualObjects(@(0), results[0][@"COUNT(*)"], nil);
 }
 
 

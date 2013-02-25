@@ -36,4 +36,7 @@
     }
 }
 
+- (BOOL)modifies {
+    return NO;
+}
 @end
