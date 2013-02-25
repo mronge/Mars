@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Mars : NSObject
-
-@end
+#import <Mars/MDatabase.h>
+#import <Mars/MQuery.h>
+#import <Mars/MConnection.h>
