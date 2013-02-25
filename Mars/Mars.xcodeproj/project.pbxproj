@@ -30,6 +30,7 @@
 		F8DE4ACC16DB2CA700F5F426 /* MDatabase.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F898883116DAF60100B5ED12 /* MDatabase.h */; };
 		F8DE4ACD16DB2CA900F5F426 /* MQuery.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F898884016DAF6E200B5ED12 /* MQuery.h */; };
 		F8DE4ACE16DB2CE500F5F426 /* MConnection.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F898883316DAF60200B5ED12 /* MConnection.h */; };
+		F8DE4ACF16DB2DEA00F5F426 /* CTLogger.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F898883D16DAF67400B5ED12 /* CTLogger.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 			dstSubfolderSpec = 16;
 			files = (
 				F898880F16DAF59400B5ED12 /* Mars.h in CopyFiles */,
+				F8DE4ACF16DB2DEA00F5F426 /* CTLogger.h in CopyFiles */,
 				F8DE4ACE16DB2CE500F5F426 /* MConnection.h in CopyFiles */,
 				F8DE4ACC16DB2CA700F5F426 /* MDatabase.h in CopyFiles */,
 				F8DE4ACD16DB2CA900F5F426 /* MQuery.h in CopyFiles */,
