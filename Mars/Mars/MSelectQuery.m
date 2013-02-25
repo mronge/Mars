@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Central Atomics. All rights reserved.
 //
 
-#import "CTSelectQuery.h"
-#import "CTQuery+Private.h"
+#import "MSelectQuery.h"
+#import "MQuery+Private.h"
 #import "NSDictionary+Mars.h"
 
-@implementation CTSelectQuery {
+@implementation MSelectQuery {
 }
 - (id)init {
     self = [super init];
@@ -20,7 +20,7 @@
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-    CTSelectQuery *query = [[CTSelectQuery alloc] init];
+    MSelectQuery *query = [[MSelectQuery alloc] init];
     query.table = self.table;
     query.columns = self.columns;
     query.where = self.where;

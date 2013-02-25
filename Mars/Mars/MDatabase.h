@@ -10,12 +10,11 @@
 
 #import <Foundation/Foundation.h>
 
-#define CTCheckNull(v) (v == nil ? [NSNull null] : v)
-#define kCTNoPk -1
+#define MCheckNull(v) (v == nil ? [NSNull null] : v)
 
-@class CTResults;
+@class MResults;
 
-@interface CTDatabase : NSObject
+@interface MDatabase : NSObject
 
 - (id)initWithPath:(NSString *)path schema:(NSString *)schema;
 - (id)initWithDBFileName:(NSString *)dbFileName schemaFileName:(NSString *)schemaFileName;
@@ -29,12 +28,12 @@
                 orderBy:(id)orderBy
                   limit:(unsigned int)limit
                  offset:(unsigned int)offset
-        completionBlock:(void (^)(NSError *err, CTResults *results))completionBlock;
+        completionBlock:(void (^)(NSError *err, NSArray *results))completionBlock;
 
 - (NSOperation *)select:(id)rows
                    from:(id)tables
                   where:(id)expression
-        completionBlock:(void (^)(NSError *err, CTResults *results))completionBlock;
+        completionBlock:(void (^)(NSError *err, NSArray *results))completionBlock;
 
 // INSERT
 

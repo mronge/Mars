@@ -16,11 +16,11 @@
 		F898881F16DAF59500B5ED12 /* libMars.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F898880616DAF59400B5ED12 /* libMars.a */; };
 		F898882516DAF59500B5ED12 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F898882316DAF59500B5ED12 /* InfoPlist.strings */; };
 		F898882816DAF59500B5ED12 /* MarsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F898882716DAF59500B5ED12 /* MarsTests.m */; };
-		F898883716DAF60200B5ED12 /* CTDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = F898883216DAF60100B5ED12 /* CTDatabase.m */; };
-		F898883916DAF60200B5ED12 /* CTDBConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = F898883416DAF60200B5ED12 /* CTDBConnection.m */; };
+		F898883716DAF60200B5ED12 /* MDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = F898883216DAF60100B5ED12 /* MDatabase.m */; };
+		F898883916DAF60200B5ED12 /* MConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = F898883416DAF60200B5ED12 /* MConnection.m */; };
 		F898883F16DAF67400B5ED12 /* CTLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F898883E16DAF67400B5ED12 /* CTLogger.m */; };
-		F898884216DAF6E200B5ED12 /* CTQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F898884116DAF6E200B5ED12 /* CTQuery.m */; };
-		F898884516DAFA5300B5ED12 /* CTSelectQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F898884416DAFA5300B5ED12 /* CTSelectQuery.m */; };
+		F898884216DAF6E200B5ED12 /* MQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F898884116DAF6E200B5ED12 /* MQuery.m */; };
+		F898884516DAFA5300B5ED12 /* MSelectQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F898884416DAFA5300B5ED12 /* MSelectQuery.m */; };
 		F898884916DAFF7F00B5ED12 /* NSDictionary+Mars.m in Sources */ = {isa = PBXBuildFile; fileRef = F898884816DAFF7F00B5ED12 /* NSDictionary+Mars.m */; };
 /* End PBXBuildFile section */
 
@@ -60,19 +60,19 @@
 		F898882416DAF59500B5ED12 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F898882616DAF59500B5ED12 /* MarsTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarsTests.h; sourceTree = "<group>"; };
 		F898882716DAF59500B5ED12 /* MarsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MarsTests.m; sourceTree = "<group>"; };
-		F898883116DAF60100B5ED12 /* CTDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDatabase.h; sourceTree = "<group>"; };
-		F898883216DAF60100B5ED12 /* CTDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDatabase.m; sourceTree = "<group>"; };
-		F898883316DAF60200B5ED12 /* CTDBConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDBConnection.h; sourceTree = "<group>"; };
-		F898883416DAF60200B5ED12 /* CTDBConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDBConnection.m; sourceTree = "<group>"; };
+		F898883116DAF60100B5ED12 /* MDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDatabase.h; sourceTree = "<group>"; };
+		F898883216DAF60100B5ED12 /* MDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDatabase.m; sourceTree = "<group>"; };
+		F898883316DAF60200B5ED12 /* MConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MConnection.h; sourceTree = "<group>"; };
+		F898883416DAF60200B5ED12 /* MConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MConnection.m; sourceTree = "<group>"; };
 		F898883D16DAF67400B5ED12 /* CTLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTLogger.h; path = Supporting/CTLogger.h; sourceTree = SOURCE_ROOT; };
 		F898883E16DAF67400B5ED12 /* CTLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTLogger.m; path = Supporting/CTLogger.m; sourceTree = SOURCE_ROOT; };
-		F898884016DAF6E200B5ED12 /* CTQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTQuery.h; sourceTree = "<group>"; };
-		F898884116DAF6E200B5ED12 /* CTQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTQuery.m; sourceTree = "<group>"; };
-		F898884316DAFA5300B5ED12 /* CTSelectQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTSelectQuery.h; sourceTree = "<group>"; };
-		F898884416DAFA5300B5ED12 /* CTSelectQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTSelectQuery.m; sourceTree = "<group>"; };
+		F898884016DAF6E200B5ED12 /* MQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQuery.h; sourceTree = "<group>"; };
+		F898884116DAF6E200B5ED12 /* MQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQuery.m; sourceTree = "<group>"; };
+		F898884316DAFA5300B5ED12 /* MSelectQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSelectQuery.h; sourceTree = "<group>"; };
+		F898884416DAFA5300B5ED12 /* MSelectQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSelectQuery.m; sourceTree = "<group>"; };
 		F898884716DAFF7F00B5ED12 /* NSDictionary+Mars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Mars.h"; sourceTree = "<group>"; };
 		F898884816DAFF7F00B5ED12 /* NSDictionary+Mars.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Mars.m"; sourceTree = "<group>"; };
-		F898884C16DB045000B5ED12 /* CTQuery+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTQuery+Private.h"; sourceTree = "<group>"; };
+		F898884C16DB045000B5ED12 /* MQuery+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MQuery+Private.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,12 +130,12 @@
 		F898880B16DAF59400B5ED12 /* Mars */ = {
 			isa = PBXGroup;
 			children = (
-				F898883116DAF60100B5ED12 /* CTDatabase.h */,
-				F898883216DAF60100B5ED12 /* CTDatabase.m */,
-				F898884016DAF6E200B5ED12 /* CTQuery.h */,
-				F898884116DAF6E200B5ED12 /* CTQuery.m */,
-				F898883316DAF60200B5ED12 /* CTDBConnection.h */,
-				F898883416DAF60200B5ED12 /* CTDBConnection.m */,
+				F898883116DAF60100B5ED12 /* MDatabase.h */,
+				F898883216DAF60100B5ED12 /* MDatabase.m */,
+				F898884016DAF6E200B5ED12 /* MQuery.h */,
+				F898884116DAF6E200B5ED12 /* MQuery.m */,
+				F898883316DAF60200B5ED12 /* MConnection.h */,
+				F898883416DAF60200B5ED12 /* MConnection.m */,
 				F898880E16DAF59400B5ED12 /* Mars.h */,
 				F898881016DAF59400B5ED12 /* Mars.m */,
 				F898884616DAFA5E00B5ED12 /* Queries */,
@@ -178,9 +178,9 @@
 		F898884616DAFA5E00B5ED12 /* Queries */ = {
 			isa = PBXGroup;
 			children = (
-				F898884C16DB045000B5ED12 /* CTQuery+Private.h */,
-				F898884316DAFA5300B5ED12 /* CTSelectQuery.h */,
-				F898884416DAFA5300B5ED12 /* CTSelectQuery.m */,
+				F898884C16DB045000B5ED12 /* MQuery+Private.h */,
+				F898884316DAFA5300B5ED12 /* MSelectQuery.h */,
+				F898884416DAFA5300B5ED12 /* MSelectQuery.m */,
 			);
 			name = Queries;
 			sourceTree = "<group>";
@@ -284,11 +284,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F898881116DAF59400B5ED12 /* Mars.m in Sources */,
-				F898883716DAF60200B5ED12 /* CTDatabase.m in Sources */,
-				F898883916DAF60200B5ED12 /* CTDBConnection.m in Sources */,
+				F898883716DAF60200B5ED12 /* MDatabase.m in Sources */,
+				F898883916DAF60200B5ED12 /* MConnection.m in Sources */,
 				F898883F16DAF67400B5ED12 /* CTLogger.m in Sources */,
-				F898884216DAF6E200B5ED12 /* CTQuery.m in Sources */,
-				F898884516DAFA5300B5ED12 /* CTSelectQuery.m in Sources */,
+				F898884216DAF6E200B5ED12 /* MQuery.m in Sources */,
+				F898884516DAFA5300B5ED12 /* MSelectQuery.m in Sources */,
 				F898884916DAFF7F00B5ED12 /* NSDictionary+Mars.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

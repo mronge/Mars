@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Central Atomics. All rights reserved.
 //
 
-#import "CTQuery.h"
+#import "MQuery.h"
 
-@interface CTQuery ()
+@interface MQuery ()
 @property (nonatomic, strong) NSString *table;
 @property (nonatomic, strong) NSArray *columns;
 @property (nonatomic, strong) NSDictionary *where;

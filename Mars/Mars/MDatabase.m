@@ -6,14 +6,14 @@
 //  Copyright (c) 2013 Central Atomics. All rights reserved.
 //
 
-#import "CTDatabase.h"
-#import "CTDBConnection.h"
+#import "MDatabase.h"
+#import "MConnection.h"
 
 #import <sqlite3.h>
 
-@implementation CTDatabase {
+@implementation MDatabase {
     NSString *_dbPath;
-    CTDBConnection *_writer;
+    MConnection *_writer;
     NSMutableSet *_readers;
     
     dispatch_queue_t _lockQueue;
@@ -35,7 +35,7 @@
         BOOL exists = [fm fileExistsAtPath:path];
         
         _dbPath = path;
-        _writer = [[CTDBConnection alloc] initWithPath:path];
+        _writer = [[MConnection alloc] initWithPath:path];
         if (![_writer open]) {
             return nil;
         }
@@ -64,12 +64,12 @@
 
 - (NSOperation *)select:(id)rows from:(id)tables where:(id)expression groupBy:(id)groupBy
                 orderBy:(id)orderBy limit:(unsigned int)limit offset:(unsigned int)offset
-        completionBlock:(void (^)(NSError *err, CTResults *results))completionBlock {
+        completionBlock:(void (^)(NSError *err, NSArray *results))completionBlock {
     return nil;
 }
 
 - (NSOperation *)select:(id)rows from:(id)tables where:(id)expression
-        completionBlock:(void (^)(NSError *err, CTResults *results))completionBlock {
+        completionBlock:(void (^)(NSError *err, NSArray *results))completionBlock {
     return nil;
 }
 
@@ -100,8 +100,8 @@
     return nil;
 }
 
-- (CTDBConnection *)reader {
-    __block CTDBConnection *aReader = nil;
+- (MConnection *)reader {
+    __block MConnection *aReader = nil;
     dispatch_sync(_lockQueue, ^{
         aReader = [_readers anyObject];
         
@@ -109,7 +109,7 @@
             [_readers removeObject:aReader];
         } else {
             // No readers available, create a new one
-            aReader = [[CTDBConnection alloc] initWithPath:_dbPath];
+            aReader = [[MConnection alloc] initWithPath:_dbPath];
             if (![aReader open]) {
                 NSLog(@"Failed to open reader");
                 aReader = nil;
@@ -119,7 +119,7 @@
     return aReader;
 }
 
-- (void)putBackReader:(CTDBConnection *)reader {
+- (void)putBackReader:(MConnection *)reader {
     dispatch_sync(_lockQueue, ^{
         NSAssert(![_readers containsObject:reader], @"The reader shouldn't already be in the set!");
         [_readers addObject:reader];

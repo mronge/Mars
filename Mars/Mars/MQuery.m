@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Central Atomics. All rights reserved.
 //
 
-#import "CTQuery.h"
-#import "CTQuery+Private.h"
-#import "CTSelectQuery.h"
+#import "MQuery.h"
+#import "MQuery+Private.h"
+#import "MSelectQuery.h"
 #import "NSDictionary+Mars.h"
 
 static NSArray *ExpandToArray(id obj) {
@@ -21,32 +21,32 @@ static NSArray *ExpandToArray(id obj) {
     return nil;
 }
 
-@implementation CTQuery
-+ (CTQuery *)selectFrom:(NSString *)table {
+@implementation MQuery
++ (MQuery *)selectFrom:(NSString *)table {
     return [[self class] select:nil from:table];
 }
 
-+ (CTQuery *)select:(id)columns from:(NSString *)table {
-    CTSelectQuery *selectQuery = [[CTSelectQuery alloc] init];
++ (MQuery *)select:(id)columns from:(NSString *)table {
+    MSelectQuery *selectQuery = [[MSelectQuery alloc] init];
     selectQuery.columns = ExpandToArray(columns);
     selectQuery.table = table;
     return selectQuery;
 }
 
-+ (CTQuery *)insertInto:(NSString *)table values:(NSDictionary *)values {
++ (MQuery *)insertInto:(NSString *)table values:(NSDictionary *)values {
     return nil;
 }
 
-+ (CTQuery *)update:(NSString *)table values:(NSDictionary *)values {
++ (MQuery *)update:(NSString *)table values:(NSDictionary *)values {
     return nil;
 }
 
-+ (CTQuery *)deleteFrom:(NSString *)table {
++ (MQuery *)deleteFrom:(NSString *)table {
     return nil;
 }
 
-- (CTQuery *)where:(NSDictionary *)expressions {
-    CTQuery *query = [self copy];
+- (MQuery *)where:(NSDictionary *)expressions {
+    MQuery *query = [self copy];
     query.where = expressions;
     return query;
 }

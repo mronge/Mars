@@ -6,14 +6,17 @@
 //  Copyright (c) 2013 Central Atomics. All rights reserved.
 //
 
-#import "CTDBConnection.h"
+#import "MConnection.h"
 #import "CTLogger.h"
-#import "CTDatabase.h"
-#import "CTQuery+Private.h"
+#import "MQuery+Private.h"
 
-@implementation CTDBConnection {
+@implementation MConnection {
     sqlite3 *_dbHandle;
     NSString *_dbPath;
+}
+
+- (id)init {
+    return [self initWithPath:nil];
 }
 
 - (id)initWithPath:(NSString *)path {
@@ -25,7 +28,7 @@
 }
 
 - (BOOL)open {
-    int err = sqlite3_open([_dbPath fileSystemRepresentation], &_dbHandle);
+    int err = sqlite3_open(_dbPath ? [_dbPath fileSystemRepresentation] : ":memory:", &_dbHandle);
     if (err != SQLITE_OK) {
         CTLog(@"ERROR OPENING DB: %d", err);
         return NO;
@@ -60,7 +63,7 @@
         if (error) {
             *error = self.lastError;
         }
-        return kCTNoPk;
+        return kNoPk;
     }
     
     if (rc == SQLITE_ROW) {
@@ -128,17 +131,17 @@
     sqlite3_finalize(stmt);
 }
 
-- (int64_t)executeUpdate:(CTQuery *)query error:(NSError **)error {
+- (int64_t)executeUpdate:(MQuery *)query error:(NSError **)error {
     sqlite3_stmt *stmt = [self createStatement:query.sql bindings:query.bindings error:error];
     if (!stmt) {
-        return kCTNoPk;
+        return kNoPk;
     }
     int64_t row = [self executeUpdateWithStatement:stmt error:error];
     [self finalizeStatement:stmt];
     return row;
 }
 
-- (CTResults *)executeQuery:(CTQuery *)query error:(NSError **)error {
+- (MResults *)executeQuery:(MQuery *)query error:(NSError **)error {
     return nil;
 }
 

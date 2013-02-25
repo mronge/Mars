@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "CTQuery.h"
+#import "MQuery.h"
 
-@interface CTSelectQuery : CTQuery
+@interface MSelectQuery : MQuery
 @end

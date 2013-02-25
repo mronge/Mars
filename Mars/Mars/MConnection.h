@@ -10,15 +10,18 @@
 
 #import <sqlite3.h>
 
-@class CTQuery;
-@class CTResults;
+#define kNoPk -1
 
-@interface CTDBConnection : NSObject
+@class MQuery;
+@class MResults;
+
+@interface MConnection : NSObject
 @property (nonatomic, assign, readonly) sqlite3 *dbHandle;
 
+- (id)init;
 - (id)initWithPath:(NSString *)path;
 - (BOOL)open;
 - (BOOL)exec:(NSString *)sql error:(NSError **)error;
-- (int64_t)executeUpdate:(CTQuery *)query error:(NSError **)error;
-- (CTResults *)executeQuery:(CTQuery *)query error:(NSError **)error;
+- (int64_t)executeUpdate:(MQuery *)query error:(NSError **)error;
+- (MResults *)executeQuery:(MQuery *)query error:(NSError **)error;
 @end
