@@ -9,6 +9,7 @@
 #import "MConnection.h"
 #import "CTLogger.h"
 #import "MQuery+Private.h"
+#import "MSelectQuery.h"
 
 @implementation MConnection {
     sqlite3 *_dbHandle;
@@ -142,6 +143,9 @@
 }
 
 - (MResults *)executeQuery:(MQuery *)query error:(NSError **)error {
+    if (![query isKindOfClass:[MSelectQuery class]]) {
+        [NSException raise:@"Invalid Query Type" format:@"Only SELECT queries are allowed"];
+    }
     return nil;
 }
 

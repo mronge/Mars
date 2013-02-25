@@ -25,6 +25,9 @@
 		F898884F16DB0F1200B5ED12 /* QueryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F898884E16DB0F1200B5ED12 /* QueryTests.m */; };
 		F898885116DB11AB00B5ED12 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F898885016DB11AA00B5ED12 /* libsqlite3.dylib */; };
 		F898885216DB11B900B5ED12 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F898885016DB11AA00B5ED12 /* libsqlite3.dylib */; };
+		F898885516DB156500B5ED12 /* MInsertQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F898885416DB156400B5ED12 /* MInsertQuery.m */; };
+		F8DE4AB416DB17AA00F5F426 /* MUpdateQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DE4AB316DB17AA00F5F426 /* MUpdateQuery.m */; };
+		F8DE4AB716DB1AB700F5F426 /* MDeleteQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DE4AB616DB1AB700F5F426 /* MDeleteQuery.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +82,12 @@
 		F898884D16DB0F1200B5ED12 /* QueryTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryTests.h; sourceTree = "<group>"; };
 		F898884E16DB0F1200B5ED12 /* QueryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryTests.m; sourceTree = "<group>"; };
 		F898885016DB11AA00B5ED12 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		F898885316DB156400B5ED12 /* MInsertQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MInsertQuery.h; sourceTree = "<group>"; };
+		F898885416DB156400B5ED12 /* MInsertQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MInsertQuery.m; sourceTree = "<group>"; };
+		F8DE4AB216DB17AA00F5F426 /* MUpdateQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUpdateQuery.h; sourceTree = "<group>"; };
+		F8DE4AB316DB17AA00F5F426 /* MUpdateQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUpdateQuery.m; sourceTree = "<group>"; };
+		F8DE4AB516DB1AB700F5F426 /* MDeleteQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDeleteQuery.h; sourceTree = "<group>"; };
+		F8DE4AB616DB1AB700F5F426 /* MDeleteQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDeleteQuery.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +201,12 @@
 				F898884C16DB045000B5ED12 /* MQuery+Private.h */,
 				F898884316DAFA5300B5ED12 /* MSelectQuery.h */,
 				F898884416DAFA5300B5ED12 /* MSelectQuery.m */,
+				F898885316DB156400B5ED12 /* MInsertQuery.h */,
+				F898885416DB156400B5ED12 /* MInsertQuery.m */,
+				F8DE4AB216DB17AA00F5F426 /* MUpdateQuery.h */,
+				F8DE4AB316DB17AA00F5F426 /* MUpdateQuery.m */,
+				F8DE4AB516DB1AB700F5F426 /* MDeleteQuery.h */,
+				F8DE4AB616DB1AB700F5F426 /* MDeleteQuery.m */,
 			);
 			name = Queries;
 			sourceTree = "<group>";
@@ -301,6 +316,9 @@
 				F898884216DAF6E200B5ED12 /* MQuery.m in Sources */,
 				F898884516DAFA5300B5ED12 /* MSelectQuery.m in Sources */,
 				F898884916DAFF7F00B5ED12 /* NSDictionary+Mars.m in Sources */,
+				F898885516DB156500B5ED12 /* MInsertQuery.m in Sources */,
+				F8DE4AB416DB17AA00F5F426 /* MUpdateQuery.m in Sources */,
+				F8DE4AB716DB1AB700F5F426 /* MDeleteQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,6 +481,7 @@
 				F898882D16DAF59500B5ED12 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F898882E16DAF59500B5ED12 /* Build configuration list for PBXNativeTarget "MarsTests" */ = {
 			isa = XCConfigurationList;
@@ -471,6 +490,7 @@
 				F898883016DAF59500B5ED12 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -9,6 +9,9 @@
 #import "MQuery.h"
 #import "MQuery+Private.h"
 #import "MSelectQuery.h"
+#import "MInsertQuery.h"
+#import "MDeleteQuery.h"
+
 #import "NSDictionary+Mars.h"
 
 static NSArray *ExpandToArray(id obj) {
@@ -36,15 +39,23 @@ static NSArray *ExpandToArray(id obj) {
 }
 
 + (MQuery *)insertInto:(NSString *)table values:(NSDictionary *)values {
-    return nil;
+    MInsertQuery *insertQuery = [[MInsertQuery alloc] init];
+    insertQuery.table = table;
+    insertQuery.values = values;
+    return insertQuery;
 }
 
 + (MQuery *)update:(NSString *)table values:(NSDictionary *)values {
-    return nil;
+    MUpdateQuery *updateQuery = [[MUpdateQuery alloc] init];
+    updateQuery.table = table;
+    updateQuery.values = values;
+    return updateQuery;
 }
 
 + (MQuery *)deleteFrom:(NSString *)table {
-    return nil;
+    MDeleteQuery *deleteQuery = [[MDeleteQuery alloc] init];
+    deleteQuery.table = table;
+    return deleteQuery;
 }
 
 - (MQuery *)where:(NSDictionary *)expressions {
@@ -63,5 +74,13 @@ static NSArray *ExpandToArray(id obj) {
         [bindings addObject:[self.where objectForKey:key]];
     }
     return bindings;
+}
+
+- (NSString *)whereString {
+    NSMutableArray *whereExprs = [NSMutableArray array];
+    for (NSString *column in [self.where sortedKeys]) {
+        [whereExprs addObject:[column stringByAppendingString:@"=?"]];
+    }
+    return [whereExprs componentsJoinedByString:@" AND "];
 }
 @end

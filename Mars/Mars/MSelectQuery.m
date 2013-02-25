@@ -8,16 +8,8 @@
 
 #import "MSelectQuery.h"
 #import "MQuery+Private.h"
-#import "NSDictionary+Mars.h"
 
-@implementation MSelectQuery {
-}
-- (id)init {
-    self = [super init];
-    if (self) {
-    }
-    return self;
-}
+@implementation MSelectQuery
 
 - (id)copyWithZone:(NSZone *)zone {
     MSelectQuery *query = [[MSelectQuery alloc] init];
@@ -38,15 +30,10 @@
     }
     
     if (self.where) {
-        NSMutableArray *whereExprs = [NSMutableArray array];
-        for (NSString *column in [self.where sortedKeys]) {
-            [whereExprs addObject:[column stringByAppendingString:@"=?"]];
-        }
-        NSString *whereExprStr = [whereExprs componentsJoinedByString:@" AND "];
-        
-        return [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@", rowStr, self.table, whereExprStr];
+        return [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@", rowStr, self.table, [self whereString]];
     } else {
         return [NSString stringWithFormat:@"SELECT %@ FROM %@", rowStr, self.table];
     }
 }
+
 @end

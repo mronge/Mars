@@ -28,4 +28,39 @@
     NSArray *correctBindings = @[@(3), @"matt"];
     STAssertEqualObjects([query bindings], correctBindings, nil);
 }
+
+- (void)testInsertQuery {
+    MQuery *query = nil;
+    
+    query = [MQuery insertInto:@"emails" values:@{@"to":@"matt", @"count":@(3)}];
+    STAssertEqualObjects(@"INSERT INTO emails (count, to) VALUES (?, ?)", [query sql], nil);
+    NSArray *correctBindings = @[@(3), @"matt"];
+    STAssertEqualObjects([query bindings], correctBindings, nil);
+}
+
+- (void)testUpdateQuery {
+    MQuery *query = nil;
+    
+    query = [MQuery update:@"emails" values:@{@"count":@(8), @"from":@"Bear"}];
+    STAssertEqualObjects(@"UPDATE emails SET count=?, from=?", [query sql], nil);
+    NSArray *correctBindings = @[@(8), @"Bear"];
+    STAssertEqualObjects([query bindings], correctBindings, nil);
+    
+    query = [[MQuery update:@"emails" values:@{@"count":@(2), @"from":@"bear"}] where:@{@"to":@"matt"}];
+    STAssertEqualObjects(@"UPDATE emails SET count=?, from=? WHERE to=?", [query sql], nil);
+    correctBindings = @[@(2), @"bear", @"matt"];
+    STAssertEqualObjects([query bindings], correctBindings, nil);
+}
+
+- (void)testDeleteQuery {
+    MQuery *query = nil;
+    
+    query = [MQuery deleteFrom:@"emails"];
+    STAssertEqualObjects(@"DELETE FROM emails", [query sql], nil);
+    
+    query = [[MQuery deleteFrom:@"emails"] where:@{@"to":@"matt"}];
+    STAssertEqualObjects(@"DELETE FROM emails WHERE to=?", [query sql], nil);
+    NSArray *correctBindings = @[@"matt"];
+    STAssertEqualObjects([query bindings], correctBindings, nil);
+}
 @end

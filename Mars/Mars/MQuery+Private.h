@@ -12,4 +12,6 @@
 @property (nonatomic, strong) NSString *table;
 @property (nonatomic, strong) NSArray *columns;
 @property (nonatomic, strong) NSDictionary *where;
+
+- (NSString *)whereString;
 @end
