@@ -12,7 +12,9 @@
 #import "NSDictionary+Mars.h"
 
 static NSArray *ExpandToArray(id obj) {
-    if ([obj isKindOfClass:[NSString class]]) {
+    if (obj == nil) {
+        return nil;
+    } else if ([obj isKindOfClass:[NSString class]]) {
         return @[obj];
     } else if ([obj isKindOfClass:[NSArray class]]) {
         return obj;

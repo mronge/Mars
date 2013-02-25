@@ -12,7 +12,4 @@
 @property (nonatomic, strong) NSString *table;
 @property (nonatomic, strong) NSArray *columns;
 @property (nonatomic, strong) NSDictionary *where;
-
-- (NSString *)sql;
-- (NSArray *)bindings;
 @end

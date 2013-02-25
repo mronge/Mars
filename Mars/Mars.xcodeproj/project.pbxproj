@@ -22,6 +22,9 @@
 		F898884216DAF6E200B5ED12 /* MQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F898884116DAF6E200B5ED12 /* MQuery.m */; };
 		F898884516DAFA5300B5ED12 /* MSelectQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F898884416DAFA5300B5ED12 /* MSelectQuery.m */; };
 		F898884916DAFF7F00B5ED12 /* NSDictionary+Mars.m in Sources */ = {isa = PBXBuildFile; fileRef = F898884816DAFF7F00B5ED12 /* NSDictionary+Mars.m */; };
+		F898884F16DB0F1200B5ED12 /* QueryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F898884E16DB0F1200B5ED12 /* QueryTests.m */; };
+		F898885116DB11AB00B5ED12 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F898885016DB11AA00B5ED12 /* libsqlite3.dylib */; };
+		F898885216DB11B900B5ED12 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F898885016DB11AA00B5ED12 /* libsqlite3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +76,9 @@
 		F898884716DAFF7F00B5ED12 /* NSDictionary+Mars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Mars.h"; sourceTree = "<group>"; };
 		F898884816DAFF7F00B5ED12 /* NSDictionary+Mars.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Mars.m"; sourceTree = "<group>"; };
 		F898884C16DB045000B5ED12 /* MQuery+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MQuery+Private.h"; sourceTree = "<group>"; };
+		F898884D16DB0F1200B5ED12 /* QueryTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryTests.h; sourceTree = "<group>"; };
+		F898884E16DB0F1200B5ED12 /* QueryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryTests.m; sourceTree = "<group>"; };
+		F898885016DB11AA00B5ED12 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F898885116DB11AB00B5ED12 /* libsqlite3.dylib in Frameworks */,
 				F898880A16DAF59400B5ED12 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -88,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F898885216DB11B900B5ED12 /* libsqlite3.dylib in Frameworks */,
 				F898881916DAF59500B5ED12 /* SenTestingKit.framework in Frameworks */,
 				F898881B16DAF59500B5ED12 /* UIKit.framework in Frameworks */,
 				F898881C16DAF59500B5ED12 /* Foundation.framework in Frameworks */,
@@ -101,6 +109,7 @@
 		F89887FD16DAF59400B5ED12 = {
 			isa = PBXGroup;
 			children = (
+				F898885016DB11AA00B5ED12 /* libsqlite3.dylib */,
 				F898880B16DAF59400B5ED12 /* Mars */,
 				F898882016DAF59500B5ED12 /* MarsTests */,
 				F898880816DAF59400B5ED12 /* Frameworks */,
@@ -162,6 +171,8 @@
 				F898882616DAF59500B5ED12 /* MarsTests.h */,
 				F898882716DAF59500B5ED12 /* MarsTests.m */,
 				F898882116DAF59500B5ED12 /* Supporting Files */,
+				F898884D16DB0F1200B5ED12 /* QueryTests.h */,
+				F898884E16DB0F1200B5ED12 /* QueryTests.m */,
 			);
 			path = MarsTests;
 			sourceTree = "<group>";
@@ -298,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F898882816DAF59500B5ED12 /* MarsTests.m in Sources */,
+				F898884F16DB0F1200B5ED12 /* QueryTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +422,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mars/Mars-Prefix.pch";
 				INFOPLIST_FILE = "MarsTests/MarsTests-Info.plist";
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -425,6 +438,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mars/Mars-Prefix.pch";
 				INFOPLIST_FILE = "MarsTests/MarsTests-Info.plist";
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};

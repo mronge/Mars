@@ -42,7 +42,7 @@
         for (NSString *column in [self.where sortedKeys]) {
             [whereExprs addObject:[column stringByAppendingString:@"=?"]];
         }
-        NSString *whereExprStr = [whereExprs componentsJoinedByString:@", "];
+        NSString *whereExprStr = [whereExprs componentsJoinedByString:@" AND "];
         
         return [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@", rowStr, self.table, whereExprStr];
     } else {
