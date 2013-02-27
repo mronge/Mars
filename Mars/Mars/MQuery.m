@@ -87,4 +87,8 @@ static NSArray *ExpandToArray(id obj) {
     }
     return [whereExprs componentsJoinedByString:@" AND "];
 }
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<%@: %@>", NSStringFromClass([self class]), [self sql]];
+}
 @end
