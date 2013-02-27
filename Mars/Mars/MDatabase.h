@@ -10,7 +10,9 @@
 
 #import <Foundation/Foundation.h>
 
-#define MCheckNull(v) (v == nil ? [NSNull null] : v)
+#define MToNull(v)   (v == nil ? [NSNull null] : v)
+#define MFromNull(v) (v == [NSNull null] ? nil : v)
+
 
 @class MQuery;
 
