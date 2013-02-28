@@ -78,9 +78,13 @@
         NSError *error = nil;
         NSArray *val = [reader executeQuery:query error:&error];
         if (val) {
-            completionBlock(nil, val);
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                completionBlock(nil, val);
+            }];
         } else {
-            completionBlock(error, nil);
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                completionBlock(error, nil);
+            }];
         }
         [self putBackReader:reader];
     }];
@@ -97,9 +101,13 @@
             if ([query isKindOfClass:[MInsertQuery class]]) {
                 val = @([_writer lastInsertRowId]);
             }
-            completionBlock(nil, val);
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                completionBlock(nil, val);
+            }];
         } else {
-            completionBlock(error, nil);
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                completionBlock(error, nil);
+            }];
         }
     }];
     [_writeQueue addOperation:op];
