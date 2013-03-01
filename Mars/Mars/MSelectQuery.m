@@ -29,11 +29,17 @@
         rowStr = @"*";
     }
     
+    NSMutableString *str = nil;
     if (self.where) {
-        return [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@", rowStr, self.table, [self whereString]];
+        str = [NSMutableString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@", rowStr, self.table, [self whereString]];
     } else {
-        return [NSString stringWithFormat:@"SELECT %@ FROM %@", rowStr, self.table];
+        str = [NSMutableString stringWithFormat:@"SELECT %@ FROM %@", rowStr, self.table];
     }
+    
+    if (self.orderBy) {
+        [str appendFormat:@" ORDER BY %@ DESC", self.orderBy];
+    }
+    return str;
 }
 
 - (BOOL)modifies {

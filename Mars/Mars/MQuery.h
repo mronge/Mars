@@ -15,6 +15,7 @@
 + (MQuery *)update:(NSString *)table values:(NSDictionary *)values;
 + (MQuery *)deleteFrom:(NSString *)table;
 - (MQuery *)where:(NSDictionary *)expressions;
+- (MQuery *)orderBy:(NSString *)field;
 
 - (NSString *)sql;
 - (NSArray *)bindings;

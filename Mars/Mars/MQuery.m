@@ -64,6 +64,12 @@ static NSArray *ExpandToArray(id obj) {
     return query;
 }
 
+- (MQuery *)orderBy:(NSString *)field {
+    MQuery *query = [self copy];
+    query.orderBy = field;
+    return query;
+}
+
 - (NSString *)sql {
     return nil;
 }
