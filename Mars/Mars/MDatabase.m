@@ -19,14 +19,12 @@
 @property (nonatomic, strong, readonly) NSOperationQueue *writeQueue;
 @property (nonatomic, strong, readonly) NSOperationQueue *readQueue;
 @property (nonatomic, strong, readonly) MConnection *writer;
+@property (nonatomic, strong, readonly) NSString *dbPath;
+@property (nonatomic, strong, readonly) NSMutableSet *readers;
+@property (nonatomic, strong, readonly) dispatch_queue_t lockQueue;
 @end
 
-@implementation MDatabase {
-    NSString *_dbPath;
-    NSMutableSet *_readers;
-    
-    dispatch_queue_t _lockQueue;
-}
+@implementation MDatabase
 
 - (id)initWithPath:(NSString *)path schema:(NSString *)schema {
     self = [super init];
@@ -78,7 +76,7 @@
 }
 
 - (MTransaction *)beginTransaction {
-    MConnection *newConnection = [[MConnection alloc] initWithPath:_dbPath];
+    MConnection *newConnection = [[MConnection alloc] initWithPath:self.dbPath];
     if (![newConnection open]) {
         return nil;
     }
@@ -133,14 +131,14 @@
 
 - (MConnection *)reader {
     __block MConnection *aReader = nil;
-    dispatch_sync(_lockQueue, ^{
-        aReader = [_readers anyObject];
+    dispatch_sync(self.lockQueue, ^{
+        aReader = [self.readers anyObject];
         
         if (aReader) {
-            [_readers removeObject:aReader];
+            [self.readers removeObject:aReader];
         } else {
             // No readers available, create a new one
-            aReader = [[MConnection alloc] initWithPath:_dbPath];
+            aReader = [[MConnection alloc] initWithPath:self.dbPath];
             if (![aReader open]) {
                 NSLog(@"Failed to open reader");
                 aReader = nil;
@@ -151,9 +149,9 @@
 }
 
 - (void)putBackReader:(MConnection *)reader {
-    dispatch_sync(_lockQueue, ^{
-        NSAssert(![_readers containsObject:reader], @"The reader shouldn't already be in the set!");
-        [_readers addObject:reader];
+    dispatch_sync(self.lockQueue, ^{
+        NSAssert(![self.readers containsObject:reader], @"The reader shouldn't already be in the set!");
+        [self.readers addObject:reader];
     });
 }
 
