@@ -15,6 +15,7 @@
 
 
 @class MQuery;
+@class MTransaction;
 
 @interface MDatabase : NSObject
 
@@ -22,5 +23,7 @@
 - (id)initWithDBFileName:(NSString *)dbFileName schemaFileName:(NSString *)schemaFileName;
 
 - (NSOperation *)query:(MQuery *)query completionBlock:(void (^)(NSError *err, id result))completionBlock;
+
+- (MTransaction *)beginTransaction;
 
 @end

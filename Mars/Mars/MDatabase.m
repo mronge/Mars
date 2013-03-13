@@ -10,17 +10,22 @@
 #import "MConnection.h"
 #import "MQuery.h"
 #import "MInsertQuery.h"
+#import "MTransaction.h"
+#import "MTransaction+Private.h"
 
 #import <sqlite3.h>
 
+@interface MDatabase ()
+@property (nonatomic, strong, readonly) NSOperationQueue *writeQueue;
+@property (nonatomic, strong, readonly) NSOperationQueue *readQueue;
+@property (nonatomic, strong, readonly) MConnection *writer;
+@end
+
 @implementation MDatabase {
     NSString *_dbPath;
-    MConnection *_writer;
     NSMutableSet *_readers;
     
     dispatch_queue_t _lockQueue;
-    NSOperationQueue *_writeQueue;
-    NSOperationQueue *_readQueue;
 }
 
 - (id)initWithPath:(NSString *)path schema:(NSString *)schema {
@@ -38,13 +43,13 @@
         
         _dbPath = path;
         _writer = [[MConnection alloc] initWithPath:path];
-        if (![_writer open]) {
+        if (![self.writer open]) {
             return nil;
         }
         
         if (!exists && schema) {
             // Create db from schema
-            [_writer exec:schema error:nil];
+            [self.writer exec:schema error:nil];
         }
     }
     return self;
@@ -72,6 +77,18 @@
     }
 }
 
+- (MTransaction *)beginTransaction {
+    MConnection *newConnection = [[MConnection alloc] initWithPath:_dbPath];
+    if (![self.writer open]) {
+        return nil;
+    }
+    if (![newConnection beginTransaction:nil]) {
+        return nil;
+    }
+    return [[MTransaction alloc] initWithConnection:newConnection];
+}
+
+
 - (NSOperation *)select:(MQuery *)query completionBlock:(void (^)(NSError *err, id result))completionBlock {
     NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
         MConnection *reader = [self reader];
@@ -88,18 +105,18 @@
         }
         [self putBackReader:reader];
     }];
-    [_readQueue addOperation:op];
+    [self.readQueue addOperation:op];
     return op;
 }
 
 - (NSOperation *)change:(MQuery *)query completionBlock:(void (^)(NSError *err, id result))completionBlock {
     NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
         NSError *error = nil;
-        BOOL success = [_writer executeUpdate:query error:&error];
-        if (success) {
+        int64_t r = [self.writer executeUpdate:query error:&error];
+        if (r > 0) {
             id val = nil;
             if ([query isKindOfClass:[MInsertQuery class]]) {
-                val = @([_writer lastInsertRowId]);
+                val = @([self.writer lastInsertRowId]);
             }
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                 completionBlock(nil, val);
@@ -110,7 +127,7 @@
             }];
         }
     }];
-    [_writeQueue addOperation:op];
+    [self.writeQueue addOperation:op];
     return op;
 }
 

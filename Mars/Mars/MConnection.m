@@ -85,6 +85,18 @@
     return results;
 }
 
+- (BOOL)beginTransaction:(NSError **)error {
+    return [self exec:@"BEGIN TRANSACTION" error:error];
+}
+
+- (BOOL)commit:(NSError **)error {
+    return [self exec:@"COMMIT" error:error];
+}
+
+- (BOOL)rollback:(NSError **)error {
+    return [self exec:@"ROLLBACK" error:error];
+}
+
 - (sqlite3 *)dbHandle {
     return _dbHandle;
 }
@@ -142,16 +154,14 @@
     
     if (SQLITE_DONE == rc) {
         return YES;
+    } else if (rc == SQLITE_ROW) {
+        NSAssert(NO, @"A executeUpdate is being called with a query string");
     } else {
         CTLog(@"Error calling sqlite3_step %@", self.lastError);
         if (error) {
             *error = self.lastError;
         }
         return NO;
-    }
-    
-    if (rc == SQLITE_ROW) {
-        NSAssert(NO, @"A executeUpdate is being called with a query string");
     }
     
     return NO;

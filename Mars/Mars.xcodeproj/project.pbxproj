@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C07AD1E09837B86305516C11 /* MTransaction.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C07AD830CA5099192F5F199B /* MTransaction.h */; };
+		C07AD8B09872AE8F4C10B0BD /* MTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = C07AD3E7B7015CA81DA77D30 /* MTransaction.m */; };
 		F898880A16DAF59400B5ED12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F898880916DAF59400B5ED12 /* Foundation.framework */; };
 		F898880F16DAF59400B5ED12 /* Mars.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F898880E16DAF59400B5ED12 /* Mars.h */; };
 		F898881916DAF59500B5ED12 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F898881816DAF59500B5ED12 /* SenTestingKit.framework */; };
@@ -55,12 +57,16 @@
 				F8DE4ACE16DB2CE500F5F426 /* MConnection.h in CopyFiles */,
 				F8DE4ACC16DB2CA700F5F426 /* MDatabase.h in CopyFiles */,
 				F8DE4ACD16DB2CA900F5F426 /* MQuery.h in CopyFiles */,
+				C07AD1E09837B86305516C11 /* MTransaction.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C07AD3E7B7015CA81DA77D30 /* MTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTransaction.m; sourceTree = "<group>"; };
+		C07AD593551F1642EF5C5DED /* MTransaction+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTransaction+Private.h"; sourceTree = "<group>"; };
+		C07AD830CA5099192F5F199B /* MTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTransaction.h; sourceTree = "<group>"; };
 		F898880616DAF59400B5ED12 /* libMars.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMars.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F898880916DAF59400B5ED12 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F898880D16DAF59400B5ED12 /* Mars-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mars-Prefix.pch"; sourceTree = "<group>"; };
@@ -165,6 +171,9 @@
 				F898880C16DAF59400B5ED12 /* Supporting Files */,
 				F898884716DAFF7F00B5ED12 /* NSDictionary+Mars.h */,
 				F898884816DAFF7F00B5ED12 /* NSDictionary+Mars.m */,
+				C07AD830CA5099192F5F199B /* MTransaction.h */,
+				C07AD3E7B7015CA81DA77D30 /* MTransaction.m */,
+				C07AD593551F1642EF5C5DED /* MTransaction+Private.h */,
 			);
 			path = Mars;
 			sourceTree = "<group>";
@@ -323,6 +332,7 @@
 				F898885516DB156500B5ED12 /* MInsertQuery.m in Sources */,
 				F8DE4AB416DB17AA00F5F426 /* MUpdateQuery.m in Sources */,
 				F8DE4AB716DB1AB700F5F426 /* MDeleteQuery.m in Sources */,
+				C07AD8B09872AE8F4C10B0BD /* MTransaction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
