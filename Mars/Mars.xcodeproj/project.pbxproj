@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C07AD1E09837B86305516C11 /* MTransaction.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C07AD830CA5099192F5F199B /* MTransaction.h */; };
+		C07AD1E09837B86305516C11 /* MTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = C07AD830CA5099192F5F199B /* MTransaction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C07AD8B09872AE8F4C10B0BD /* MTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = C07AD3E7B7015CA81DA77D30 /* MTransaction.m */; };
 		F898880A16DAF59400B5ED12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F898880916DAF59400B5ED12 /* Foundation.framework */; };
-		F898880F16DAF59400B5ED12 /* Mars.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F898880E16DAF59400B5ED12 /* Mars.h */; };
+		F898880F16DAF59400B5ED12 /* Mars.h in Headers */ = {isa = PBXBuildFile; fileRef = F898880E16DAF59400B5ED12 /* Mars.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F898881916DAF59500B5ED12 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F898881816DAF59500B5ED12 /* SenTestingKit.framework */; };
 		F898881B16DAF59500B5ED12 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F898881A16DAF59500B5ED12 /* UIKit.framework */; };
 		F898881C16DAF59500B5ED12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F898880916DAF59400B5ED12 /* Foundation.framework */; };
@@ -29,10 +29,10 @@
 		F898885516DB156500B5ED12 /* MInsertQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F898885416DB156400B5ED12 /* MInsertQuery.m */; };
 		F8DE4AB416DB17AA00F5F426 /* MUpdateQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DE4AB316DB17AA00F5F426 /* MUpdateQuery.m */; };
 		F8DE4AB716DB1AB700F5F426 /* MDeleteQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DE4AB616DB1AB700F5F426 /* MDeleteQuery.m */; };
-		F8DE4ACC16DB2CA700F5F426 /* MDatabase.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F898883116DAF60100B5ED12 /* MDatabase.h */; };
-		F8DE4ACD16DB2CA900F5F426 /* MQuery.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F898884016DAF6E200B5ED12 /* MQuery.h */; };
-		F8DE4ACE16DB2CE500F5F426 /* MConnection.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F898883316DAF60200B5ED12 /* MConnection.h */; };
-		F8DE4ACF16DB2DEA00F5F426 /* CTLogger.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F898883D16DAF67400B5ED12 /* CTLogger.h */; };
+		F8DE4ACC16DB2CA700F5F426 /* MDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = F898883116DAF60100B5ED12 /* MDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F8DE4ACD16DB2CA900F5F426 /* MQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = F898884016DAF6E200B5ED12 /* MQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F8DE4ACE16DB2CE500F5F426 /* MConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = F898883316DAF60200B5ED12 /* MConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F8DE4ACF16DB2DEA00F5F426 /* CTLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = F898883D16DAF67400B5ED12 /* CTLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,24 +44,6 @@
 			remoteInfo = Mars;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		F898880416DAF59400B5ED12 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/${PRODUCT_NAME}";
-			dstSubfolderSpec = 16;
-			files = (
-				F898880F16DAF59400B5ED12 /* Mars.h in CopyFiles */,
-				F8DE4ACF16DB2DEA00F5F426 /* CTLogger.h in CopyFiles */,
-				F8DE4ACE16DB2CE500F5F426 /* MConnection.h in CopyFiles */,
-				F8DE4ACC16DB2CA700F5F426 /* MDatabase.h in CopyFiles */,
-				F8DE4ACD16DB2CA900F5F426 /* MQuery.h in CopyFiles */,
-				C07AD1E09837B86305516C11 /* MTransaction.h in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C07AD3E7B7015CA81DA77D30 /* MTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTransaction.m; sourceTree = "<group>"; };
@@ -227,6 +209,22 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		F836F9CB16F01B55007DE438 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F898880F16DAF59400B5ED12 /* Mars.h in Headers */,
+				F8DE4ACF16DB2DEA00F5F426 /* CTLogger.h in Headers */,
+				F8DE4ACE16DB2CE500F5F426 /* MConnection.h in Headers */,
+				F8DE4ACC16DB2CA700F5F426 /* MDatabase.h in Headers */,
+				F8DE4ACD16DB2CA900F5F426 /* MQuery.h in Headers */,
+				C07AD1E09837B86305516C11 /* MTransaction.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		F898880516DAF59400B5ED12 /* Mars */ = {
 			isa = PBXNativeTarget;
@@ -234,7 +232,7 @@
 			buildPhases = (
 				F898880216DAF59400B5ED12 /* Sources */,
 				F898880316DAF59400B5ED12 /* Frameworks */,
-				F898880416DAF59400B5ED12 /* CopyFiles */,
+				F836F9CB16F01B55007DE438 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -427,7 +425,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mars/Mars-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = ../../include/Mars/Private;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = ../../include/Mars;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -439,7 +439,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mars/Mars-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = ../../include/Mars/Private;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = ../../include/Mars;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
