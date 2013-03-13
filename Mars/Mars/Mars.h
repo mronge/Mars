@@ -11,4 +11,5 @@
 #import <Mars/MDatabase.h>
 #import <Mars/MQuery.h>
 #import <Mars/MConnection.h>
+#import <Mars/MTransaction.h>
 #import <Mars/CTLogger.h>

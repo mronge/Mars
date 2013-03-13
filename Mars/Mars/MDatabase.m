@@ -79,7 +79,7 @@
 
 - (MTransaction *)beginTransaction {
     MConnection *newConnection = [[MConnection alloc] initWithPath:_dbPath];
-    if (![self.writer open]) {
+    if (![newConnection open]) {
         return nil;
     }
     if (![newConnection beginTransaction:nil]) {
