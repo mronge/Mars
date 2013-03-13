@@ -10,6 +10,8 @@
 
 @class MQuery;
 
+/* Create a transaction by calling -beginTransaction on MDatabase.
+ * Don't instantiate this class directly */
 @interface MTransaction : MDatabase
 
 - (NSOperation *)commitWithCompletionBlock:(void (^)(NSError *error))completionBlock;

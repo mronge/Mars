@@ -11,6 +11,7 @@
 #import "MQuery.h"
 #import "MInsertQuery.h"
 #import "MTransaction.h"
+#import "MTransaction.h"
 #import "MTransaction+Private.h"
 
 #import <sqlite3.h>
@@ -22,6 +23,7 @@
 @property (nonatomic, strong, readonly) NSString *dbPath;
 @property (nonatomic, strong, readonly) NSMutableSet *readers;
 @property (nonatomic, strong, readonly) dispatch_queue_t lockQueue;
+@property (nonatomic, strong, readonly) NSMutableSet *openTransactions;
 @end
 
 @implementation MDatabase
@@ -35,6 +37,7 @@
         _lockQueue = dispatch_queue_create("MDatabaseLock", NULL);
         
         _readers = [[NSMutableSet alloc] init];
+        _openTransactions = [[NSMutableSet alloc] init];
         
         NSFileManager *fm = [[NSFileManager alloc] init];
         BOOL exists = [fm fileExistsAtPath:path];
@@ -83,13 +86,25 @@
     if (![newConnection beginTransaction:nil]) {
         return nil;
     }
-    return [[MTransaction alloc] initWithConnection:newConnection];
+    MTransaction *transaction = [[MTransaction alloc] initWithConnection:newConnection database:self];
+    // We need to keep a reference to the transaction so ARC doesn't dealloc it
+    dispatch_sync(self.lockQueue, ^{
+        [self.openTransactions addObject:transaction];
+    });
+    return transaction;
 }
 
+- (void)endTransaction:(MTransaction *)transaction {
+    dispatch_sync(self.lockQueue, ^{
+        [self.openTransactions removeObject:transaction];
+    });
+}
 
 - (NSOperation *)select:(MQuery *)query completionBlock:(void (^)(NSError *err, id result))completionBlock {
+    __weak MDatabase *weakSelf = self;
     NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
-        MConnection *reader = [self reader];
+        MDatabase *strongSelf = weakSelf;
+        MConnection *reader = [strongSelf reader];
         NSError *error = nil;
         NSArray *val = [reader executeQuery:query error:&error];
         if (val) {
@@ -108,13 +123,15 @@
 }
 
 - (NSOperation *)change:(MQuery *)query completionBlock:(void (^)(NSError *err, id result))completionBlock {
+    __weak MDatabase *weakSelf = self;
     NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
+        MDatabase *strongSelf = weakSelf;
         NSError *error = nil;
-        int64_t r = [self.writer executeUpdate:query error:&error];
+        int64_t r = [strongSelf.writer executeUpdate:query error:&error];
         if (r > 0) {
             id val = nil;
             if ([query isKindOfClass:[MInsertQuery class]]) {
-                val = @([self.writer lastInsertRowId]);
+                val = @([strongSelf.writer lastInsertRowId]);
             }
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                 completionBlock(nil, val);

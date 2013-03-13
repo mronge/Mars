@@ -11,5 +11,5 @@
 #import "MTransaction.h"
 
 @interface MTransaction ()
-- (id)initWithConnection:(MConnection *)connection;
+- (id)initWithConnection:(MConnection *)connection database:(MDatabase *)database;
 @end

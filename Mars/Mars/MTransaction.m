@@ -9,11 +9,12 @@
 #import "MTransaction.h"
 #import "MQuery.h"
 #import "MConnection.h"
-#import "MTransaction+Private.h"
+#import "MDatabase+Private.h"
 
 @interface MTransaction ()
 @property (nonatomic, strong, readonly) MConnection *connection;
 @property (nonatomic, strong, readonly) NSOperationQueue *queue;
+@property (nonatomic, weak, readonly) MDatabase *database;
 @end
 
 @implementation MTransaction {
@@ -29,20 +30,25 @@
     return nil;
 }
 
-- (id)initWithConnection:(MConnection *)connection {
+- (id)initWithConnection:(MConnection *)connection database:(MDatabase *)database {
     self = [super init];
     if (self) {
         _connection = connection;
         _queue = [[NSOperationQueue alloc] init];
         _queue.maxConcurrentOperationCount = 1;
+        _database = database;
     }
     return self;
 }
 
 - (NSOperation *)commitWithCompletionBlock:(void (^)(NSError *error))completionBlock {
+    __weak MTransaction *weakSelf = self;
     NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
+        MTransaction *strongSelf = weakSelf;
         NSError *error = nil;
         BOOL success = [self.connection commit:&error];
+        [_connection close];
+        [_database endTransaction:strongSelf];
         if (success) {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                 completionBlock(nil);
@@ -58,9 +64,13 @@
 }
 
 - (NSOperation *)rollbackWithCompletionBlock:(void (^)(NSError *error))completionBlock {
+    __weak MTransaction *weakSelf = self;
     NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
+        MTransaction *strongSelf = weakSelf;
         NSError *error = nil;
         BOOL success = [self.connection rollback:&error];
+        [_connection close];
+        [_database endTransaction:strongSelf];
         if (success) {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                 completionBlock(nil);

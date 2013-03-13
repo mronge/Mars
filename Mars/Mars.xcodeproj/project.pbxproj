@@ -49,6 +49,7 @@
 		C07AD3E7B7015CA81DA77D30 /* MTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTransaction.m; sourceTree = "<group>"; };
 		C07AD593551F1642EF5C5DED /* MTransaction+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTransaction+Private.h"; sourceTree = "<group>"; };
 		C07AD830CA5099192F5F199B /* MTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTransaction.h; sourceTree = "<group>"; };
+		C07ADDE8399B0B50FAE585D1 /* MDatabase+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MDatabase+Private.h"; sourceTree = "<group>"; };
 		F898880616DAF59400B5ED12 /* libMars.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMars.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F898880916DAF59400B5ED12 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F898880D16DAF59400B5ED12 /* Mars-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mars-Prefix.pch"; sourceTree = "<group>"; };
@@ -144,6 +145,7 @@
 			children = (
 				F898883116DAF60100B5ED12 /* MDatabase.h */,
 				F898883216DAF60100B5ED12 /* MDatabase.m */,
+				C07ADDE8399B0B50FAE585D1 /* MDatabase+Private.h */,
 				F898884016DAF6E200B5ED12 /* MQuery.h */,
 				F898884116DAF6E200B5ED12 /* MQuery.m */,
 				F898883316DAF60200B5ED12 /* MConnection.h */,
@@ -387,11 +389,13 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_PEDANTIC = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				WARNING_CFLAGS = "";
 			};
 			name = Debug;
 		};
@@ -410,11 +414,13 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_PEDANTIC = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				WARNING_CFLAGS = "";
 			};
 			name = Release;
 		};
