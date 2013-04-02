@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Central Atomics. All rights reserved.
 //
 
-#import "MDatabase.h"
+#import <Mars/MDatabase.h>
 
 @class MQuery;
 

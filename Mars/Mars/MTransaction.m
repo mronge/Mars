@@ -13,7 +13,6 @@
 
 @interface MTransaction ()
 @property (nonatomic, strong, readonly) MConnection *connection;
-@property (nonatomic, strong, readonly) NSOperationQueue *queue;
 @property (nonatomic, weak, readonly) MDatabase *database;
 @end
 
@@ -34,8 +33,6 @@
     self = [super init];
     if (self) {
         _connection = connection;
-        _queue = [[NSOperationQueue alloc] init];
-        _queue.maxConcurrentOperationCount = 1;
         _database = database;
     }
     return self;
@@ -51,11 +48,11 @@
         [_database endTransaction:strongSelf];
         if (success) {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                completionBlock(nil);
+                if (completionBlock) completionBlock(nil);
             }];
         } else {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                completionBlock(error);
+                if (completionBlock) completionBlock(error);
             }];
         }
     }];
@@ -73,11 +70,11 @@
         [_database endTransaction:strongSelf];
         if (success) {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                completionBlock(nil);
+                if (completionBlock) completionBlock(nil);
             }];
         } else {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                completionBlock(error);
+                if (completionBlock) completionBlock(error);
             }];
         }
     }];
@@ -107,12 +104,8 @@
     return self.connection;
 }
 
-- (NSOperationQueue *)writeQueue {
-    return self.queue;
-}
-
 - (NSOperationQueue *)readQueue {
-    return self.queue;
+    return [self writeQueue];
 }
 
 @end

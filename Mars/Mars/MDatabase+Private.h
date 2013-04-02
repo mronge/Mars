@@ -13,5 +13,7 @@
 @class MTransaction;
 
 @interface MDatabase ()
+@property (nonatomic, strong, readonly) NSOperationQueue *writeQueue;
+
 - (void)endTransaction:(MTransaction *)transaction;
 @end

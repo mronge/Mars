@@ -11,13 +11,12 @@
 #import "MQuery.h"
 #import "MInsertQuery.h"
 #import "MTransaction.h"
-#import "MTransaction.h"
+#import "MDatabase+Private.h"
 #import "MTransaction+Private.h"
 
 #import <sqlite3.h>
 
 @interface MDatabase ()
-@property (nonatomic, strong, readonly) NSOperationQueue *writeQueue;
 @property (nonatomic, strong, readonly) NSOperationQueue *readQueue;
 @property (nonatomic, strong, readonly) MConnection *writer;
 @property (nonatomic, strong, readonly) NSString *dbPath;
@@ -109,11 +108,11 @@
         NSArray *val = [reader executeQuery:query error:&error];
         if (val) {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                completionBlock(nil, val);
+                if (completionBlock) completionBlock(nil, val);
             }];
         } else {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                completionBlock(error, nil);
+                if (completionBlock) completionBlock(error, nil);
             }];
         }
         [self putBackReader:reader];
@@ -134,11 +133,11 @@
                 val = @([strongSelf.writer lastInsertRowId]);
             }
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                completionBlock(nil, val);
+                if (completionBlock) completionBlock(nil, val);
             }];
         } else {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                completionBlock(error, nil);
+                if (completionBlock) completionBlock(error, nil);
             }];
         }
     }];
