@@ -86,6 +86,7 @@
         return nil;
     }
     MTransaction *transaction = [[MTransaction alloc] initWithConnection:newConnection database:self];
+    transaction.writeQueue = self.writeQueue;
     // We need to keep a reference to the transaction so ARC doesn't dealloc it
     dispatch_sync(self.lockQueue, ^{
         [self.openTransactions addObject:transaction];

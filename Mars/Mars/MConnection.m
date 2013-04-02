@@ -29,7 +29,9 @@
 }
 
 - (BOOL)open {
-    int err = sqlite3_open(_dbPath ? (char *)[_dbPath fileSystemRepresentation] : ":memory:", &_dbHandle);
+    int err = sqlite3_open_v2(_dbPath ? (char *)[_dbPath fileSystemRepresentation] : ":memory:", &_dbHandle,
+    SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_SHAREDCACHE, NULL);
+
     if (err != SQLITE_OK) {
         CTLog(@"ERROR OPENING DB: %d", err);
         return NO;
