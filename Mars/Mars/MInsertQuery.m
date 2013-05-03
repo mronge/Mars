@@ -15,15 +15,20 @@
 - (NSString *)sql {
     NSAssert(self.table, nil);
     NSAssert(self.values, nil);
+
+    NSMutableArray *quotedValues = [NSMutableArray array];
+    for (NSString *value in [self.values sortedKeys]) {
+        [quotedValues addObject:[self quote:value]];
+    }
     
-    NSString *columnsStr = [[self.values sortedKeys] componentsJoinedByString:@", "];
+    NSString *columnsStr = [quotedValues componentsJoinedByString:@", "];
     NSMutableArray *placeholders = [NSMutableArray array];
     for (int i = 0; i < self.values.count; i++) {
         [placeholders addObject:@"?"];
     }
     NSString *valuesStr = [placeholders componentsJoinedByString:@", "];
     
-    return [NSString stringWithFormat:@"INSERT INTO %@ (%@) VALUES (%@)", self.table, columnsStr, valuesStr];
+    return [NSString stringWithFormat:@"INSERT INTO %@ (%@) VALUES (%@)", [self quote:self.table], columnsStr, valuesStr];
 }
 
 - (MQuery *)where:(NSDictionary *)expressions {

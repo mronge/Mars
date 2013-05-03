@@ -15,4 +15,5 @@
 @property (nonatomic, strong) NSString *orderBy;
 
 - (NSString *)whereString;
+- (NSString *)quote:(NSString *)str;
 @end

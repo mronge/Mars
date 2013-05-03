@@ -26,14 +26,14 @@
     
     NSMutableArray *columns = [NSMutableArray array];
     for (NSString *column in [self.values sortedKeys]) {
-        [columns addObject:[column stringByAppendingString:@"=?"]];
+        [columns addObject:[[self quote:column] stringByAppendingString:@"=?"]];
     }
     NSString *columnsStr = [columns componentsJoinedByString:@", "];
     
     if (self.where) {
-        return [NSString stringWithFormat:@"UPDATE %@ SET %@ WHERE %@", self.table, columnsStr, [self whereString]];
+        return [NSString stringWithFormat:@"UPDATE %@ SET %@ WHERE %@", [self quote:self.table], columnsStr, [self whereString]];
     } else {
-        return [NSString stringWithFormat:@"UPDATE %@ SET %@", self.table, columnsStr];
+        return [NSString stringWithFormat:@"UPDATE %@ SET %@", [self quote:self.table], columnsStr];
     }
 }
 

@@ -89,12 +89,21 @@ static NSArray *ExpandToArray(id obj) {
 - (NSString *)whereString {
     NSMutableArray *whereExprs = [NSMutableArray array];
     for (NSString *column in [self.where sortedKeys]) {
-        [whereExprs addObject:[column stringByAppendingString:@"=?"]];
+        [whereExprs addObject:[[self quote:column] stringByAppendingString:@"=?"]];
     }
     return [whereExprs componentsJoinedByString:@" AND "];
 }
 
 - (NSString *)description {
     return [NSString stringWithFormat:@"<%@: %@>", NSStringFromClass([self class]), [self sql]];
+}
+
+- (NSString *)quote:(NSString *)str {
+    if ([str compare:@"COUNT(*)" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+        // No need to escape this
+        return str;
+    }
+
+    return [NSString stringWithFormat:@"\"%@\"", str];
 }
 @end

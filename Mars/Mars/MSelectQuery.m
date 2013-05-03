@@ -24,20 +24,24 @@
     
     NSString *rowStr = nil;
     if (self.columns) {
-        rowStr = [self.columns componentsJoinedByString:@", "];
+        NSMutableArray *columns = [NSMutableArray array];
+        for (NSString *column in self.columns) {
+            [columns addObject:[self quote:column]];
+        }
+        rowStr = [columns componentsJoinedByString:@", "];
     } else {
         rowStr = @"*";
     }
     
     NSMutableString *str = nil;
     if (self.where) {
-        str = [NSMutableString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@", rowStr, self.table, [self whereString]];
+        str = [NSMutableString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@", rowStr, [self quote:self.table], [self whereString]];
     } else {
-        str = [NSMutableString stringWithFormat:@"SELECT %@ FROM %@", rowStr, self.table];
+        str = [NSMutableString stringWithFormat:@"SELECT %@ FROM %@", rowStr, [self quote:self.table]];
     }
     
     if (self.orderBy) {
-        [str appendFormat:@" ORDER BY %@ DESC", self.orderBy];
+        [str appendFormat:@" ORDER BY %@ DESC", [self quote:self.orderBy]];
     }
     return str;
 }

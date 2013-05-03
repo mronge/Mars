@@ -21,9 +21,9 @@
     NSAssert(self.table, nil);
     
     if (self.where) {
-        return [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@", self.table, [self whereString]];
+        return [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@", [self quote:self.table], [self whereString]];
     } else {
-        return [NSString stringWithFormat:@"DELETE FROM %@", self.table];
+        return [NSString stringWithFormat:@"DELETE FROM %@", [self quote:self.table]];
     }
 }
 @end
