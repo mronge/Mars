@@ -99,6 +99,7 @@ static NSArray *ExpandToArray(id obj) {
 }
 
 - (NSString *)quote:(NSString *)str {
+    NSAssert([str isKindOfClass:[NSString class]], @"The arg must be a string!");
     if ([str compare:@"COUNT(*)" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
         // No need to quote this
         return str;

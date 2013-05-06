@@ -66,4 +66,17 @@
     NSArray *correctBindings = @[@"matt"];
     STAssertEqualObjects([query bindings], correctBindings, nil);
 }
+
+- (void)testTableFormats {
+    MQuery *query = nil;
+
+    query = [MQuery selectFrom:@"emails"];
+    STAssertEqualObjects([query sql], @"SELECT * FROM \"emails\"", nil);
+
+    query = [MQuery selectFrom:@[@"emails", @"e"]];
+    STAssertEqualObjects([query sql], @"SELECT * FROM \"emails\" AS \"e\"", nil);
+
+    query = [MQuery selectFrom:@[@[@"emails", @"e"], @[@"address", @"a"]]];
+    STAssertEqualObjects([query sql], @"SELECT * FROM \"emails\" AS \"e\", \"address\" AS \"a\"", nil);
+}
 @end

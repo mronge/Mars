@@ -27,7 +27,7 @@
         [placeholders addObject:@"?"];
     }
     NSString *valuesStr = [placeholders componentsJoinedByString:@", "];
-    
+
     return [NSString stringWithFormat:@"INSERT INTO %@ (%@) VALUES (%@)", [self quote:self.table], columnsStr, valuesStr];
 }
 

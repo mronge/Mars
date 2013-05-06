@@ -9,7 +9,7 @@
 #import "MQuery.h"
 
 @interface MQuery ()
-@property (nonatomic, strong) NSString *table;
+@property (nonatomic, strong) id table;
 @property (nonatomic, strong) NSArray *columns;
 @property (nonatomic, strong) NSDictionary *where;
 @property (nonatomic, strong) NSString *orderBy;
