@@ -100,10 +100,18 @@ static NSArray *ExpandToArray(id obj) {
 
 - (NSString *)quote:(NSString *)str {
     if ([str compare:@"COUNT(*)" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-        // No need to escape this
+        // No need to quote this
         return str;
     }
 
-    return [NSString stringWithFormat:@"\"%@\"", str];
+    // Need to make sure we quote things like M.user properly to "M"."user"
+
+    NSArray *components = [str componentsSeparatedByString:@"."];
+    NSMutableArray *quotedComponents = [NSMutableArray array];
+    for (NSString *comp in components) {
+        [quotedComponents addObject:[NSString stringWithFormat:@"\"%@\"", comp]];
+    }
+
+    return [quotedComponents componentsJoinedByString:@"."];
 }
 @end

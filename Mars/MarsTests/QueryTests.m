@@ -19,6 +19,9 @@
     
     query = [MQuery select:@"name" from:@"emails"];
     STAssertEqualObjects([query sql], @"SELECT \"name\" FROM \"emails\"", nil);
+
+    query = [MQuery select:@"emails.name" from:@"emails"];
+    STAssertEqualObjects([query sql], @"SELECT \"emails\".\"name\" FROM \"emails\"", nil);
     
     query = [MQuery select:@[@"name", @"to", @"from"] from:@"emails"];
     STAssertEqualObjects([query sql], @"SELECT \"name\", \"to\", \"from\" FROM \"emails\"", nil);
