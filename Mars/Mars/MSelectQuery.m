@@ -34,11 +34,7 @@
     
     NSString *rowStr = nil;
     if (self.columns) {
-        NSMutableArray *columns = [NSMutableArray array];
-        for (NSString *column in self.columns) {
-            [columns addObject:[self quote:column]];
-        }
-        rowStr = [columns componentsJoinedByString:@", "];
+        rowStr = [self expandAsStrings:self.columns];
     } else {
         rowStr = @"*";
     }
@@ -68,28 +64,7 @@
 }
 
 - (NSString *)tableString {
-    if ([self.table isKindOfClass:[NSString class]]) {
-        // Plain old string format "tablename"
-        return [self quote:self.table];
-    } else if ([self.table isKindOfClass:[NSArray class]]) {
-        NSArray *tableInfos = (NSArray *)self.table;
-        if (tableInfos.count == 2 && [tableInfos[0] isKindOfClass:[NSString class]] && [tableInfos[1] isKindOfClass:[NSString class]]) {
-            // Is of the format ["table" "alias"]
-            return [self asString:tableInfos[0] alias:tableInfos[1]];
-        } else if (tableInfos.count > 0) {
-            NSMutableArray *asStatements = [NSMutableArray array];
-            for (id obj in tableInfos) {
-                if (![obj isKindOfClass:[NSArray class]]) {
-                    [NSException raise:@"Unsupported" format:@"Must be a NSArray!"];
-                }
-                NSArray *info = (NSArray *)obj;
-                [asStatements addObject:[self asString:info[0] alias:info[1]]];
-            }
-            return [asStatements componentsJoinedByString:@", "];
-        }
-    }
-    [NSException raise:@"Unsupported" format:@"The table must be a string or an array like [tablename alias], or [[table1 t1], [table2 t2]]"];
-    return nil;
+    return [self expandAsStrings:self.table];
 }
 
 - (NSString *)whereString {
@@ -100,7 +75,35 @@
         return self.join;
     }
     return where;
+}
 
+- (NSString *)expandAsStrings:(id)structure {
+    if ([structure isKindOfClass:[NSString class]]) {
+        // Plain old string format "tablename"
+        return [self quote:structure];
+    } else if ([structure isKindOfClass:[NSArray class]]) {
+        NSArray *infos = (NSArray *)structure;
+        if (infos.count > 0) {
+            NSMutableArray *asStatements = [NSMutableArray array];
+            for (id obj in infos) {
+                if ([obj isKindOfClass:[NSString class]]) {
+                    [asStatements addObject:[self quote:obj]];
+                } else if ([obj isKindOfClass:[NSArray class]]) {
+                    NSArray *info = (NSArray *)obj;
+                    if (info.count == 2) {
+                        [asStatements addObject:[self asString:info[0] alias:info[1]]];
+                    } else {
+                        [NSException raise:@"Unsupported" format:@"Must be of the form [table1 t1]!"];
+                    }
+                } else {
+                    [NSException raise:@"Unsupported" format:@"Must be a NSArray of the form [table1 t1] or a NSString!"];
+                }
+            }
+            return [asStatements componentsJoinedByString:@", "];
+        }
+    }
+    [NSException raise:@"Unsupported" format:@"Must be a string or an array like [[table1 t1], [table2 t2], table3]"];
+    return nil;
 }
 
 - (NSString *)asString:(NSString *)table alias:(NSString *)alias {

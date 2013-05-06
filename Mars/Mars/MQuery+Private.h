@@ -10,7 +10,7 @@
 
 @interface MQuery ()
 @property (nonatomic, strong) id table;
-@property (nonatomic, strong) NSArray *columns;
+@property (nonatomic, strong) id columns;
 @property (nonatomic, strong) NSDictionary *where;
 
 - (NSString *)whereString;

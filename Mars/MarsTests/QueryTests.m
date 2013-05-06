@@ -35,6 +35,13 @@
     STAssertEqualObjects([query bindings], correctBindings, nil);
 }
 
+- (void)testSelectAsQuery {
+    MSelectQuery *query = nil;
+
+    query = [MQuery select:@[@[@"name", @"n"], @"to", @[@"from", @"f"]] from:@"emails"];
+    STAssertEqualObjects([query sql], @"SELECT \"name\" AS \"n\", \"to\", \"from\" AS \"f\" FROM \"emails\"", nil);
+}
+
 - (void)testInsertQuery {
     MInsertQuery *query = nil;
     
@@ -76,7 +83,7 @@
     query = [MQuery selectFrom:@"emails"];
     STAssertEqualObjects([query sql], @"SELECT * FROM \"emails\"", nil);
 
-    query = [MQuery selectFrom:@[@"emails", @"e"]];
+    query = [MQuery selectFrom:@[@[@"emails", @"e"]]];
     STAssertEqualObjects([query sql], @"SELECT * FROM \"emails\" AS \"e\"", nil);
 
     query = [MQuery selectFrom:@[@[@"emails", @"e"], @[@"address", @"a"]]];
