@@ -12,7 +12,6 @@
 @property (nonatomic, strong) id table;
 @property (nonatomic, strong) NSArray *columns;
 @property (nonatomic, strong) NSDictionary *where;
-@property (nonatomic, strong) NSString *orderBy;
 
 - (NSString *)whereString;
 - (NSString *)quote:(NSString *)str;

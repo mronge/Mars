@@ -9,7 +9,6 @@
 #import "MUpdateQuery.h"
 #import "MQuery+Private.h"
 #import "NSDictionary+Mars.h"
-#import "MSelectQuery.h"
 
 @implementation MUpdateQuery
 

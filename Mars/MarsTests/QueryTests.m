@@ -82,4 +82,14 @@
     query = [MQuery selectFrom:@[@[@"emails", @"e"], @[@"address", @"a"]]];
     STAssertEqualObjects([query sql], @"SELECT * FROM \"emails\" AS \"e\", \"address\" AS \"a\"", nil);
 }
+
+- (void)testLimit {
+    MSelectQuery *query = nil;
+
+    query = [[MQuery selectFrom:@"emails"] limit:50];
+    STAssertEqualObjects([query sql], @"SELECT * FROM \"emails\" LIMIT 50", nil);
+
+    query = [[MQuery selectFrom:@"emails"] limit:50 offset:10];
+    STAssertEqualObjects([query sql], @"SELECT * FROM \"emails\" LIMIT 50 OFFSET 10", nil);
+}
 @end

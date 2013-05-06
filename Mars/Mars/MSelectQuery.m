@@ -9,6 +9,12 @@
 #import "MSelectQuery.h"
 #import "MQuery+Private.h"
 
+@interface MSelectQuery ()
+@property (nonatomic, strong) NSString *orderBy;
+@property (nonatomic, assign) NSUInteger limit;
+@property (nonatomic, assign) NSUInteger offset;
+@end
+
 @implementation MSelectQuery
 
 - (id)copyWithZone:(NSZone *)zone {
@@ -16,6 +22,8 @@
     query.table = self.table;
     query.columns = self.columns;
     query.where = self.where;
+    query.limit = self.limit;
+    query.offset = self.offset;
     return query;
 }
 
@@ -43,6 +51,13 @@
     if (self.orderBy) {
         [str appendFormat:@" ORDER BY %@ DESC", [self quote:self.orderBy]];
     }
+
+    if (self.limit != 0 && self.offset != 0) {
+        [str appendFormat:@" LIMIT %d OFFSET %d", self.limit, self.offset];
+    } else if (self.limit != 0) {
+        [str appendFormat:@" LIMIT %d", self.limit];
+    }
+
     return str;
 }
 
@@ -87,6 +102,19 @@
 - (instancetype)orderBy:(NSString *)field {
     MSelectQuery *query = [self copy];
     query.orderBy = field;
+    return query;
+}
+
+- (instancetype)limit:(NSUInteger)limit {
+    MSelectQuery *query = [self copy];
+    query.limit = limit;
+    return query;
+}
+
+- (instancetype)limit:(NSUInteger)limit offset:(NSUInteger)offset {
+    MSelectQuery *query = [self copy];
+    query.limit = limit;
+    query.offset = offset;
     return query;
 }
 
