@@ -9,6 +9,7 @@
 #import "MUpdateQuery.h"
 #import "MQuery+Private.h"
 #import "NSDictionary+Mars.h"
+#import "MSelectQuery.h"
 
 @implementation MUpdateQuery
 
@@ -44,6 +45,11 @@
     }
     [bindings addObjectsFromArray:[super bindings]];
     return bindings;
+}
+
+// Have to do this to get the compiler to stop complaining
+- (instancetype)where:(NSDictionary *)expressions {
+    return (MUpdateQuery *)[super where:expressions];
 }
 
 @end

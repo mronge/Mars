@@ -9,6 +9,10 @@
 #import "MarsTests.h"
 #import "MConnection.h"
 #import "MQuery.h"
+#import "MDeleteQuery.h"
+#import "MUpdateQuery.h"
+#import "MInsertQuery.h"
+#import "MSelectQuery.h"
 
 @implementation MarsTests {
     MConnection *_conn;

@@ -31,10 +31,4 @@
     return [NSString stringWithFormat:@"INSERT INTO %@ (%@) VALUES (%@)", [self quote:self.table], columnsStr, valuesStr];
 }
 
-- (MQuery *)where:(NSDictionary *)expressions {
-    [NSException raise:@"Unsupported" format:@"You can't use WHERE with an INSERT"];
-    return nil;
-}
-
-
 @end

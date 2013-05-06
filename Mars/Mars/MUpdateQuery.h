@@ -10,4 +10,6 @@
 
 @interface MUpdateQuery : MQuery
 @property (nonatomic, strong) NSDictionary *values;
+
+- (instancetype)where:(NSDictionary *)expressions;
 @end

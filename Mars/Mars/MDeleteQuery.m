@@ -26,4 +26,9 @@
         return [NSString stringWithFormat:@"DELETE FROM %@", [self quote:self.table]];
     }
 }
+
+// Have to do this to get the compiler to stop complaining
+- (instancetype)where:(NSDictionary *)expressions {
+    return (MDeleteQuery *)[super where:expressions];
+}
 @end

@@ -9,5 +9,5 @@
 #import "MQuery.h"
 
 @interface MDeleteQuery : MQuery
-
+- (instancetype)where:(NSDictionary *)expressions;
 @end

@@ -8,11 +8,14 @@
 
 #import "QueryTests.h"
 #import "MQuery.h"
+#import "MSelectQuery.h"
+#import "MInsertQuery.h"
+#import "MDeleteQuery.h"
 
 @implementation QueryTests
 
 - (void)testSelectQuery {
-    MQuery *query = nil;
+    MSelectQuery *query = nil;
     
     query = [MQuery selectFrom:@"emails"];
     STAssertEqualObjects([query sql], @"SELECT * FROM \"emails\"", nil);
@@ -33,7 +36,7 @@
 }
 
 - (void)testInsertQuery {
-    MQuery *query = nil;
+    MInsertQuery *query = nil;
     
     query = [MQuery insertInto:@"emails" values:@{@"to":@"matt", @"count":@(3)}];
     STAssertEqualObjects(@"INSERT INTO \"emails\" (\"count\", \"to\") VALUES (?, ?)", [query sql], nil);
@@ -42,7 +45,7 @@
 }
 
 - (void)testUpdateQuery {
-    MQuery *query = nil;
+    MUpdateQuery *query = nil;
     
     query = [MQuery update:@"emails" values:@{@"count":@(8), @"from":@"Bear"}];
     STAssertEqualObjects(@"UPDATE \"emails\" SET \"count\"=?, \"from\"=?", [query sql], nil);
@@ -56,7 +59,7 @@
 }
 
 - (void)testDeleteQuery {
-    MQuery *query = nil;
+    MDeleteQuery *query = nil;
     
     query = [MQuery deleteFrom:@"emails"];
     STAssertEqualObjects(@"DELETE FROM \"emails\"", [query sql], nil);
@@ -68,7 +71,7 @@
 }
 
 - (void)testTableFormats {
-    MQuery *query = nil;
+    MSelectQuery *query = nil;
 
     query = [MQuery selectFrom:@"emails"];
     STAssertEqualObjects([query sql], @"SELECT * FROM \"emails\"", nil);

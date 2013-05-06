@@ -8,8 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Mars/MDatabase.h>
 #import <Mars/MQuery.h>
+#import <Mars/MSelectQuery.h>
+#import <Mars/MInsertQuery.h>
+#import <Mars/MDeleteQuery.h>
+#import <Mars/MUpdateQuery.h>
+
+#import <Mars/MDatabase.h>
 #import <Mars/MConnection.h>
 #import <Mars/MTransaction.h>
 #import <Mars/MDatabase+AsyncAdditions.h>

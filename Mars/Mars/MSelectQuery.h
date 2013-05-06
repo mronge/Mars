@@ -11,4 +11,6 @@
 #import "MQuery.h"
 
 @interface MSelectQuery : MQuery
+- (instancetype)where:(NSDictionary *)expressions;
+- (instancetype)orderBy:(NSString *)field;
 @end

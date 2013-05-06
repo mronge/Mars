@@ -8,14 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+@class MDeleteQuery;
+@class MUpdateQuery;
+@class MSelectQuery;
+@class MInsertQuery;
+
 @interface MQuery : NSObject
-+ (MQuery *)selectFrom:(id)table;
-+ (MQuery *)select:(id)columns from:(NSString *)table;
-+ (MQuery *)insertInto:(NSString *)table values:(NSDictionary *)values;
-+ (MQuery *)update:(NSString *)table values:(NSDictionary *)values;
-+ (MQuery *)deleteFrom:(NSString *)table;
-- (MQuery *)where:(NSDictionary *)expressions;
-- (MQuery *)orderBy:(NSString *)field;
++ (MSelectQuery *)selectFrom:(id)table;
++ (MSelectQuery *)select:(id)columns from:(NSString *)table;
++ (MInsertQuery *)insertInto:(NSString *)table values:(NSDictionary *)values;
++ (MUpdateQuery *)update:(NSString *)table values:(NSDictionary *)values;
++ (MDeleteQuery *)deleteFrom:(NSString *)table;
 
 - (NSString *)sql;
 - (NSArray *)bindings;

@@ -58,22 +58,36 @@
         NSArray *tableInfos = (NSArray *)self.table;
         if (tableInfos.count == 2 && [tableInfos[0] isKindOfClass:[NSString class]] && [tableInfos[1] isKindOfClass:[NSString class]]) {
             // Is of the format ["table" "alias"]
-            NSArray *info = (NSArray *)tableInfos[0];
             return [self asString:tableInfos[0] alias:tableInfos[1]];
         } else if (tableInfos.count > 0) {
             NSMutableArray *asStatements = [NSMutableArray array];
             for (id obj in tableInfos) {
-                NSAssert([obj isKindOfClass:[NSArray class]], @"Must be a NSArray!");
+                if (![obj isKindOfClass:[NSArray class]]) {
+                    [NSException raise:@"Unsupported" format:@"Must be a NSArray!"];
+                }
                 NSArray *info = (NSArray *)obj;
                 [asStatements addObject:[self asString:info[0] alias:info[1]]];
             }
             return [asStatements componentsJoinedByString:@", "];
         }
     }
-    NSAssert(false, @"The table must be a string or an array like [tablename alias], or [[table1 t1], [table2 t2]]");
+    [NSException raise:@"Unsupported" format:@"The table must be a string or an array like [tablename alias], or [[table1 t1], [table2 t2]]"];
+    return nil;
 }
 
 - (NSString *)asString:(NSString *)table alias:(NSString *)alias {
     return [NSString stringWithFormat:@"%@ AS %@", [self quote:table], [self quote:alias]];
 }
+
+// Have to do this to get the compiler to stop complaining
+- (instancetype)where:(NSDictionary *)expressions {
+    return (MSelectQuery *)[super where:expressions];
+}
+
+- (instancetype)orderBy:(NSString *)field {
+    MSelectQuery *query = [self copy];
+    query.orderBy = field;
+    return query;
+}
+
 @end

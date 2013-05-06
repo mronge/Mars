@@ -27,32 +27,32 @@ static NSArray *ExpandToArray(id obj) {
 }
 
 @implementation MQuery
-+ (MQuery *)selectFrom:(NSString *)table {
++ (MSelectQuery *)selectFrom:(NSString *)table {
     return [[self class] select:nil from:table];
 }
 
-+ (MQuery *)select:(id)columns from:(NSString *)table {
++ (MSelectQuery *)select:(id)columns from:(NSString *)table {
     MSelectQuery *selectQuery = [[MSelectQuery alloc] init];
     selectQuery.columns = ExpandToArray(columns);
     selectQuery.table = table;
     return selectQuery;
 }
 
-+ (MQuery *)insertInto:(NSString *)table values:(NSDictionary *)values {
++ (MInsertQuery *)insertInto:(NSString *)table values:(NSDictionary *)values {
     MInsertQuery *insertQuery = [[MInsertQuery alloc] init];
     insertQuery.table = table;
     insertQuery.values = values;
     return insertQuery;
 }
 
-+ (MQuery *)update:(NSString *)table values:(NSDictionary *)values {
++ (MUpdateQuery *)update:(NSString *)table values:(NSDictionary *)values {
     MUpdateQuery *updateQuery = [[MUpdateQuery alloc] init];
     updateQuery.table = table;
     updateQuery.values = values;
     return updateQuery;
 }
 
-+ (MQuery *)deleteFrom:(NSString *)table {
++ (MDeleteQuery *)deleteFrom:(NSString *)table {
     MDeleteQuery *deleteQuery = [[MDeleteQuery alloc] init];
     deleteQuery.table = table;
     return deleteQuery;
@@ -61,12 +61,6 @@ static NSArray *ExpandToArray(id obj) {
 - (MQuery *)where:(NSDictionary *)expressions {
     MQuery *query = [self copy];
     query.where = expressions;
-    return query;
-}
-
-- (MQuery *)orderBy:(NSString *)field {
-    MQuery *query = [self copy];
-    query.orderBy = field;
     return query;
 }
 
