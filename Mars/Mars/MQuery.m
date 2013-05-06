@@ -27,14 +27,14 @@ static NSArray *ExpandToArray(id obj) {
 }
 
 @implementation MQuery
-+ (MSelectQuery *)selectFrom:(NSString *)table {
-    return [[self class] select:nil from:table];
++ (MSelectQuery *)selectFrom:(id)tables {
+    return [[self class] select:nil from:tables];
 }
 
-+ (MSelectQuery *)select:(id)columns from:(NSString *)table {
++ (MSelectQuery *)select:(id)columns from:(id)tables {
     MSelectQuery *selectQuery = [[MSelectQuery alloc] init];
     selectQuery.columns = ExpandToArray(columns);
-    selectQuery.table = table;
+    selectQuery.table = tables;
     return selectQuery;
 }
 

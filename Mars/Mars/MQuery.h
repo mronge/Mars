@@ -14,8 +14,8 @@
 @class MInsertQuery;
 
 @interface MQuery : NSObject
-+ (MSelectQuery *)selectFrom:(id)table;
-+ (MSelectQuery *)select:(id)columns from:(NSString *)table;
++ (MSelectQuery *)selectFrom:(id)tables;
++ (MSelectQuery *)select:(id)columns from:(id)tables;
 + (MInsertQuery *)insertInto:(NSString *)table values:(NSDictionary *)values;
 + (MUpdateQuery *)update:(NSString *)table values:(NSDictionary *)values;
 + (MDeleteQuery *)deleteFrom:(NSString *)table;

@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *orderBy;
 @property (nonatomic, assign) NSUInteger limit;
 @property (nonatomic, assign) NSUInteger offset;
+@property (nonatomic, strong) NSString *join;
 @end
 
 @implementation MSelectQuery
@@ -24,6 +25,7 @@
     query.where = self.where;
     query.limit = self.limit;
     query.offset = self.offset;
+    query.join = self.join;
     return query;
 }
 
@@ -42,7 +44,7 @@
     }
     
     NSMutableString *str = nil;
-    if (self.where) {
+    if (self.where || self.join) {
         str = [NSMutableString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@", rowStr, [self tableString], [self whereString]];
     } else {
         str = [NSMutableString stringWithFormat:@"SELECT %@ FROM %@", rowStr, [self tableString]];
@@ -90,6 +92,17 @@
     return nil;
 }
 
+- (NSString *)whereString {
+    NSMutableString *where = [[super whereString] mutableCopy];
+    if (self.join && where.length > 0) {
+        [where appendFormat:@" AND %@", self.join];
+    } else if (self.join && where.length == 0) {
+        return self.join;
+    }
+    return where;
+
+}
+
 - (NSString *)asString:(NSString *)table alias:(NSString *)alias {
     return [NSString stringWithFormat:@"%@ AS %@", [self quote:table], [self quote:alias]];
 }
@@ -115,6 +128,12 @@
     MSelectQuery *query = [self copy];
     query.limit = limit;
     query.offset = offset;
+    return query;
+}
+
+- (instancetype)join:(NSString *)join {
+    MSelectQuery *query = [self copy];
+    query.join = join;
     return query;
 }
 

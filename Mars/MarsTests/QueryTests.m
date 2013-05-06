@@ -92,4 +92,13 @@
     query = [[MQuery selectFrom:@"emails"] limit:50 offset:10];
     STAssertEqualObjects([query sql], @"SELECT * FROM \"emails\" LIMIT 50 OFFSET 10", nil);
 }
+
+- (void)testJoin {
+    NSArray *tables = @[@[@"emails", @"e"], @[@"address", @"a"]];
+    MQuery *query = [[[MQuery select:@[@"e.name", @"a.location"] from:tables] where:@{@"to" : @"matt"}] join:@"a.id=e.address"];
+    STAssertEqualObjects(@"SELECT \"e\".\"name\", \"a\".\"location\" FROM \"emails\" AS \"e\", \"address\" AS \"a\" WHERE \"to\"=? AND a.id=e.address", [query sql], nil);
+
+    query = [[MQuery select:@[@"e.name", @"a.location"] from:tables] join:@"a.id=e.address"];
+    STAssertEqualObjects(@"SELECT \"e\".\"name\", \"a\".\"location\" FROM \"emails\" AS \"e\", \"address\" AS \"a\" WHERE a.id=e.address", [query sql], nil);
+}
 @end
