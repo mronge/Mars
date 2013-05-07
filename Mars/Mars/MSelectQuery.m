@@ -11,6 +11,7 @@
 
 @interface MSelectQuery ()
 @property (nonatomic, strong) NSString *orderBy;
+@property (nonatomic, strong) NSString *order;
 @property (nonatomic, assign) NSUInteger limit;
 @property (nonatomic, assign) NSUInteger offset;
 @property (nonatomic, strong) NSString *join;
@@ -26,6 +27,8 @@
     query.limit = self.limit;
     query.offset = self.offset;
     query.join = self.join;
+    query.order = self.order;
+    query.orderBy = self.orderBy;
     return query;
 }
 
@@ -47,7 +50,7 @@
     }
     
     if (self.orderBy) {
-        [str appendFormat:@" ORDER BY %@ DESC", [self quote:self.orderBy]];
+        [str appendFormat:@" ORDER BY %@ %@", [self quote:self.orderBy], self.order];
     }
 
     if (self.limit != 0 && self.offset != 0) {
@@ -115,9 +118,17 @@
     return (MSelectQuery *)[super where:expressions];
 }
 
-- (instancetype)orderBy:(NSString *)field {
+- (instancetype)orderByAsc:(NSString *)field {
     MSelectQuery *query = [self copy];
     query.orderBy = field;
+    query.order = @"ASC";
+    return query;
+}
+
+- (instancetype)orderByDesc:(NSString *)field {
+    MSelectQuery *query = [self copy];
+    query.orderBy = field;
+    query.order = @"DESC";
     return query;
 }
 

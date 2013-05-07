@@ -12,7 +12,8 @@
 
 @interface MSelectQuery : MQuery
 - (instancetype)where:(NSDictionary *)expressions;
-- (instancetype)orderBy:(NSString *)field;
+- (instancetype)orderByAsc:(NSString *)field;
+- (instancetype)orderByDesc:(NSString *)field;
 - (instancetype)limit:(NSUInteger)limit;
 - (instancetype)limit:(NSUInteger)limit offset:(NSUInteger)offset;
 - (instancetype)join:(NSString *)join;

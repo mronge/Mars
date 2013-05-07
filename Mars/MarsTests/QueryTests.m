@@ -108,4 +108,13 @@
     query = [[MQuery select:@[@"e.name", @"a.location"] from:tables] join:@"a.id=e.address"];
     STAssertEqualObjects(@"SELECT \"e\".\"name\", \"a\".\"location\" FROM \"emails\" AS \"e\", \"address\" AS \"a\" WHERE a.id=e.address", [query sql], nil);
 }
+
+- (void)testOrderBy {
+    MSelectQuery *query = nil;
+    query = [[MQuery selectFrom:@"emails"] orderByAsc:@"date"];
+    STAssertEqualObjects([query sql], @"SELECT * FROM \"emails\" ORDER BY \"date\" ASC", nil);
+    
+    query = [[MQuery selectFrom:@"emails"] orderByDesc:@"date"];
+    STAssertEqualObjects([query sql], @"SELECT * FROM \"emails\" ORDER BY \"date\" DESC", nil);
+}
 @end
