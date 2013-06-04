@@ -16,4 +16,7 @@
 - (NSString *)whereString;
 - (NSString *)quote:(NSString *)str;
 - (instancetype)where:(NSDictionary *)expressions;
+
+- (NSString *)sql;
+- (NSArray *)bindings;
 @end

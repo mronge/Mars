@@ -20,7 +20,5 @@
 + (MUpdateQuery *)update:(NSString *)table values:(NSDictionary *)values;
 + (MDeleteQuery *)deleteFrom:(NSString *)table;
 
-- (NSString *)sql;
-- (NSArray *)bindings;
 - (BOOL)modifies;
 @end

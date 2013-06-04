@@ -11,6 +11,7 @@
 #import "MSelectQuery.h"
 #import "MInsertQuery.h"
 #import "MDeleteQuery.h"
+#import "MQuery+Private.h"
 
 @implementation QueryTests
 
