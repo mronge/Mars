@@ -10,10 +10,6 @@
 
 #import "MDatabase.h"
 
-@class MTransaction;
-
 @interface MDatabase ()
 @property (nonatomic, strong) NSOperationQueue *writeQueue;
-
-- (void)endTransaction:(MTransaction *)transaction;
 @end

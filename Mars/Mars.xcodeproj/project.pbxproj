@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C07AD1E09837B86305516C11 /* MTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = C07AD830CA5099192F5F199B /* MTransaction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C07AD390CA27F1FB3BF7C675 /* MDatabase+AsyncAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = C07ADE8ABA30C0CC9A8B33D7 /* MDatabase+AsyncAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C07AD8B09872AE8F4C10B0BD /* MTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = C07AD3E7B7015CA81DA77D30 /* MTransaction.m */; };
 		C07ADA022259BBC98EBE16D5 /* MDatabase+AsyncAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C07ADB33DDA93701C9CD6E57 /* MDatabase+AsyncAdditions.m */; };
 		F898880A16DAF59400B5ED12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F898880916DAF59400B5ED12 /* Foundation.framework */; };
 		F898880F16DAF59400B5ED12 /* Mars.h in Headers */ = {isa = PBXBuildFile; fileRef = F898880E16DAF59400B5ED12 /* Mars.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -52,9 +50,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C07AD3E7B7015CA81DA77D30 /* MTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTransaction.m; sourceTree = "<group>"; };
-		C07AD593551F1642EF5C5DED /* MTransaction+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTransaction+Private.h"; sourceTree = "<group>"; };
-		C07AD830CA5099192F5F199B /* MTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTransaction.h; sourceTree = "<group>"; };
 		C07ADB33DDA93701C9CD6E57 /* MDatabase+AsyncAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MDatabase+AsyncAdditions.m"; sourceTree = "<group>"; };
 		C07ADDE8399B0B50FAE585D1 /* MDatabase+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MDatabase+Private.h"; sourceTree = "<group>"; };
 		C07ADE8ABA30C0CC9A8B33D7 /* MDatabase+AsyncAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MDatabase+AsyncAdditions.h"; sourceTree = "<group>"; };
@@ -163,9 +158,6 @@
 				F898880C16DAF59400B5ED12 /* Supporting Files */,
 				F898884716DAFF7F00B5ED12 /* NSDictionary+Mars.h */,
 				F898884816DAFF7F00B5ED12 /* NSDictionary+Mars.m */,
-				C07AD830CA5099192F5F199B /* MTransaction.h */,
-				C07AD3E7B7015CA81DA77D30 /* MTransaction.m */,
-				C07AD593551F1642EF5C5DED /* MTransaction+Private.h */,
 				C07ADE8ABA30C0CC9A8B33D7 /* MDatabase+AsyncAdditions.h */,
 				C07ADB33DDA93701C9CD6E57 /* MDatabase+AsyncAdditions.m */,
 			);
@@ -236,7 +228,6 @@
 				F8E25330173835A6003FD8FF /* MUpdateQuery.h in Headers */,
 				F8E25331173835A8003FD8FF /* MDeleteQuery.h in Headers */,
 				C07AD390CA27F1FB3BF7C675 /* MDatabase+AsyncAdditions.h in Headers */,
-				C07AD1E09837B86305516C11 /* MTransaction.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +268,7 @@
 			name = MarsTests;
 			productName = MarsTests;
 			productReference = F898881716DAF59500B5ED12 /* MarsTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -285,7 +276,7 @@
 		F89887FE16DAF59400B5ED12 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Central Atomics";
 			};
 			buildConfigurationList = F898880116DAF59400B5ED12 /* Build configuration list for PBXProject "Mars" */;
@@ -347,7 +338,6 @@
 				F898885516DB156500B5ED12 /* MInsertQuery.m in Sources */,
 				F8DE4AB416DB17AA00F5F426 /* MUpdateQuery.m in Sources */,
 				F8DE4AB716DB1AB700F5F426 /* MDeleteQuery.m in Sources */,
-				C07AD8B09872AE8F4C10B0BD /* MTransaction.m in Sources */,
 				C07ADA022259BBC98EBE16D5 /* MDatabase+AsyncAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -443,7 +433,6 @@
 		F898882C16DAF59500B5ED12 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				DSTROOT = /tmp/Mars.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mars/Mars-Prefix.pch";
@@ -459,7 +448,6 @@
 		F898882D16DAF59500B5ED12 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				DSTROOT = /tmp/Mars.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mars/Mars-Prefix.pch";

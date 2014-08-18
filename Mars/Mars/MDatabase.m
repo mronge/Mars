@@ -10,9 +10,7 @@
 #import "MConnection.h"
 #import "MQuery.h"
 #import "MInsertQuery.h"
-#import "MTransaction.h"
 #import "MDatabase+Private.h"
-#import "MTransaction+Private.h"
 
 #import <sqlite3.h>
 
@@ -75,29 +73,6 @@
     } else {
         return [self select:query completionBlock:completionBlock];
     }
-}
-
-- (MTransaction *)beginTransaction {
-    MConnection *newConnection = [[MConnection alloc] initWithPath:self.dbPath];
-    if (![newConnection open]) {
-        return nil;
-    }
-    if (![newConnection beginTransaction:nil]) {
-        return nil;
-    }
-    MTransaction *transaction = [[MTransaction alloc] initWithConnection:newConnection database:self];
-    transaction.writeQueue = self.writeQueue;
-    // We need to keep a reference to the transaction so ARC doesn't dealloc it
-    dispatch_sync(self.lockQueue, ^{
-        [self.openTransactions addObject:transaction];
-    });
-    return transaction;
-}
-
-- (void)endTransaction:(MTransaction *)transaction {
-    dispatch_sync(self.lockQueue, ^{
-        [self.openTransactions removeObject:transaction];
-    });
 }
 
 - (NSOperation *)select:(MQuery *)query completionBlock:(void (^)(NSError *err, id result))completionBlock {
