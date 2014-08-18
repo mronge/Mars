@@ -64,7 +64,9 @@
     if ([query isKindOfClass:[MSelectQuery class]]) {
         [NSException raise:@"Invalid Query Type" format:@"Only UPDATE, DELETE, INSERT queries are allowed"];
     }
-    
+#if LOG_SQL
+    NSLog(@"%@", query.sql);
+#endif
     sqlite3_stmt *stmt = [self createStatement:query.sql bindings:query.bindings error:error];
     if (!stmt) {
         return kNoPk;
@@ -78,6 +80,9 @@
     if (![query isKindOfClass:[MSelectQuery class]]) {
         [NSException raise:@"Invalid Query Type" format:@"Only SELECT queries are allowed"];
     }
+#if LOG_SQL
+    NSLog(@"%@", query.sql);
+#endif
     sqlite3_stmt *stmt = [self createStatement:query.sql bindings:query.bindings error:error];
     if (!stmt) {
         return nil;

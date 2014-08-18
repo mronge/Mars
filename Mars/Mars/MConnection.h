@@ -10,6 +10,8 @@
 
 #import <sqlite3.h>
 
+#define LOG_SQL 0
+
 #define kNoPk -1
 
 @class MQuery;
