@@ -10,7 +10,7 @@
 
 #import <sqlite3.h>
 
-#define LOG_SQL 0
+#define LOG_SQL 1
 
 #define kNoPk -1
 

@@ -54,9 +54,9 @@
     }
 
     if (self.limit != 0 && self.offset != 0) {
-        [str appendFormat:@" LIMIT %d OFFSET %d", self.limit, self.offset];
+        [str appendFormat:@" LIMIT %lu OFFSET %lu", (unsigned long)self.limit, (unsigned long)self.offset];
     } else if (self.limit != 0) {
-        [str appendFormat:@" LIMIT %d", self.limit];
+        [str appendFormat:@" LIMIT %lu", (unsigned long)self.limit];
     }
 
     return str;

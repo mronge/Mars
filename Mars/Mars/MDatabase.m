@@ -69,9 +69,44 @@
 
 - (NSOperation *)query:(MQuery *)query completionBlock:(void (^)(NSError *err, id result))completionBlock {
     if ([query modifies]) {
-        return [self change:query completionBlock:completionBlock];
+        return [self change:query completionBlock:^(NSError *err, id result) {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                if (completionBlock) completionBlock(err, result);
+            }];
+        }];
     } else {
-        return [self select:query completionBlock:completionBlock];
+        return [self select:query completionBlock:^(NSError *err, id result) {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                if (completionBlock) completionBlock(err, result);
+            }];
+        }];
+    }
+}
+
+- (id)query:(MQuery *)query error:(NSError **)err {
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    __block NSError *error = nil;
+    __block id result = nil;
+    
+    if ([query modifies]) {
+        [self change:query completionBlock:^(NSError *e, id r) {
+            result = r;
+            error = e;
+            dispatch_semaphore_signal(semaphore);
+        }];
+    } else {
+        [self select:query completionBlock:^(NSError *e, id r) {
+            result = r;
+            error = e;
+            dispatch_semaphore_signal(semaphore);
+        }];
+    }
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    *err = error;
+    if (error) {
+        return nil;
+    } else {
+        return result;
     }
 }
 
@@ -83,13 +118,9 @@
         NSError *error = nil;
         NSArray *val = [reader executeQuery:query error:&error];
         if (val) {
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                if (completionBlock) completionBlock(nil, val);
-            }];
+            if (completionBlock) completionBlock(nil, val);
         } else {
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                if (completionBlock) completionBlock(error, nil);
-            }];
+            if (completionBlock) completionBlock(error, nil);
         }
         [self putBackReader:reader];
     }];
@@ -108,13 +139,9 @@
             if ([query isKindOfClass:[MInsertQuery class]]) {
                 val = @([strongSelf.writer lastInsertRowId]);
             }
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                if (completionBlock) completionBlock(nil, val);
-            }];
+            if (completionBlock) completionBlock(nil, val);
         } else {
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                if (completionBlock) completionBlock(error, nil);
-            }];
+            if (completionBlock) completionBlock(error, nil);
         }
     }];
     [self.writeQueue addOperation:op];

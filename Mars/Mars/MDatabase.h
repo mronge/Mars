@@ -22,5 +22,9 @@
 - (id)initWithPath:(NSString *)path schema:(NSString *)schema;
 - (id)initWithDBFileName:(NSString *)dbFileName schemaFileName:(NSString *)schemaFileName;
 
+// Non blocking version
 - (NSOperation *)query:(MQuery *)query completionBlock:(void (^)(NSError *err, id result))completionBlock;
+
+// Blocking version
+- (id)query:(MQuery *)query error:(NSError **)err;
 @end
