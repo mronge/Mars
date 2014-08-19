@@ -16,6 +16,5 @@
 
 #import <Mars/MDatabase.h>
 #import <Mars/MConnection.h>
-#import <Mars/MTransaction.h>
 #import <Mars/MDatabase+AsyncAdditions.h>
 #import <Mars/CTLogger.h>
