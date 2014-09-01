@@ -102,7 +102,7 @@
         }];
     }
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-    *err = error;
+    if (err) *err = error;
     if (error) {
         return nil;
     } else {

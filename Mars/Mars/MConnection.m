@@ -259,7 +259,7 @@
     sqlite3_stmt *stmt;
     int rc = sqlite3_prepare_v2(self.dbHandle, [sql UTF8String], -1, &stmt, 0);
     if (SQLITE_OK != rc) {
-        *error = self.lastError;
+        if (error) *error = self.lastError;
         CTLog(@"Error preparing statement: %@ ", sql, self.lastError);
         sqlite3_finalize(stmt);
         return NULL;
