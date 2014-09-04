@@ -71,7 +71,12 @@ static NSArray *ExpandToArray(id obj) {
 - (NSArray *)bindings {
     NSMutableArray *bindings = [NSMutableArray array];
     for (NSString *key in [self.where sortedKeys]) {
-        [bindings addObject:[self.where objectForKey:key]];
+        id obj = self.where[key];
+        if ([obj isKindOfClass:[NSArray class]]) {
+            [bindings addObjectsFromArray:(NSArray *)obj];
+        } else {
+            [bindings addObject:[self.where objectForKey:key]];
+        }
     }
     return bindings;
 }
@@ -80,10 +85,26 @@ static NSArray *ExpandToArray(id obj) {
     return YES;
 }
 
+- (NSString *)placeholdStringForCount:(NSInteger)count {
+    NSMutableArray *questions = [NSMutableArray array];
+    for (NSInteger i = 0; i < count; i++) {
+        [questions addObject:@"?"];
+    }
+    return [questions componentsJoinedByString:@","];
+}
+
 - (NSString *)whereString {
     NSMutableArray *whereExprs = [NSMutableArray array];
     for (NSString *column in [self.where sortedKeys]) {
-        [whereExprs addObject:[[self quote:column] stringByAppendingString:@"=?"]];
+        id obj = self.where[column];
+        if ([obj isKindOfClass:[NSArray class]]) {
+            NSArray *array = (NSArray *)obj;
+            NSString *inStr = [NSString stringWithFormat:@" IN (%@)", [self placeholdStringForCount:array.count]];
+            NSString *str = [[self quote:column] stringByAppendingString:inStr];
+            [whereExprs addObject:str];
+        } else {
+            [whereExprs addObject:[[self quote:column] stringByAppendingString:@"=?"]];
+        }
     }
     return [whereExprs componentsJoinedByString:@" AND "];
 }

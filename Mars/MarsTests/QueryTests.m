@@ -36,6 +36,13 @@
     STAssertEqualObjects([query bindings], correctBindings, nil);
 }
 
+- (void)testSelectWhereInQuery {
+    MSelectQuery *query = [[MQuery selectFrom:@"emails"] where:@{@"to":@"matt", @"count":@(3), @"uid":@[@(1), @(2)]}];
+    STAssertEqualObjects(@"SELECT * FROM \"emails\" WHERE \"count\"=? AND \"to\"=? AND \"uid\" IN (?,?)", [query sql], nil);
+    NSArray *correctBindings = @[@(3), @"matt", @(1), @(2)];
+    STAssertEqualObjects([query bindings], correctBindings, nil);
+}
+
 - (void)testSelectAsQuery {
     MSelectQuery *query = nil;
 
