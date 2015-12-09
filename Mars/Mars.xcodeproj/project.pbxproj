@@ -11,7 +11,6 @@
 		C07ADA022259BBC98EBE16D5 /* MDatabase+AsyncAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C07ADB33DDA93701C9CD6E57 /* MDatabase+AsyncAdditions.m */; };
 		F898880A16DAF59400B5ED12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F898880916DAF59400B5ED12 /* Foundation.framework */; };
 		F898880F16DAF59400B5ED12 /* Mars.h in Headers */ = {isa = PBXBuildFile; fileRef = F898880E16DAF59400B5ED12 /* Mars.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F898881916DAF59500B5ED12 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F898881816DAF59500B5ED12 /* SenTestingKit.framework */; };
 		F898881B16DAF59500B5ED12 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F898881A16DAF59500B5ED12 /* UIKit.framework */; };
 		F898881C16DAF59500B5ED12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F898880916DAF59400B5ED12 /* Foundation.framework */; };
 		F898881F16DAF59500B5ED12 /* libMars.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F898880616DAF59400B5ED12 /* libMars.a */; };
@@ -57,8 +56,7 @@
 		F898880916DAF59400B5ED12 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F898880D16DAF59400B5ED12 /* Mars-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mars-Prefix.pch"; sourceTree = "<group>"; };
 		F898880E16DAF59400B5ED12 /* Mars.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mars.h; sourceTree = "<group>"; };
-		F898881716DAF59500B5ED12 /* MarsTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarsTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F898881816DAF59500B5ED12 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		F898881716DAF59500B5ED12 /* MarsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F898881A16DAF59500B5ED12 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		F898882216DAF59500B5ED12 /* MarsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MarsTests-Info.plist"; sourceTree = "<group>"; };
 		F898882416DAF59500B5ED12 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -103,7 +101,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F898885216DB11B900B5ED12 /* libsqlite3.dylib in Frameworks */,
-				F898881916DAF59500B5ED12 /* SenTestingKit.framework in Frameworks */,
 				F898881B16DAF59500B5ED12 /* UIKit.framework in Frameworks */,
 				F898881C16DAF59500B5ED12 /* Foundation.framework in Frameworks */,
 				F898881F16DAF59500B5ED12 /* libMars.a in Frameworks */,
@@ -128,7 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				F898880616DAF59400B5ED12 /* libMars.a */,
-				F898881716DAF59500B5ED12 /* MarsTests.octest */,
+				F898881716DAF59500B5ED12 /* MarsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -137,7 +134,6 @@
 			isa = PBXGroup;
 			children = (
 				F898880916DAF59400B5ED12 /* Foundation.framework */,
-				F898881816DAF59500B5ED12 /* SenTestingKit.framework */,
 				F898881A16DAF59500B5ED12 /* UIKit.framework */,
 			);
 			name = Frameworks;
@@ -267,8 +263,8 @@
 			);
 			name = MarsTests;
 			productName = MarsTests;
-			productReference = F898881716DAF59500B5ED12 /* MarsTests.octest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
+			productReference = F898881716DAF59500B5ED12 /* MarsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -276,6 +272,7 @@
 		F89887FE16DAF59400B5ED12 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastTestingUpgradeCheck = 0720;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Central Atomics";
 			};
@@ -398,7 +395,7 @@
 				GCC_WARN_PEDANTIC = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "";
@@ -423,7 +420,7 @@
 				GCC_WARN_PEDANTIC = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				WARNING_CFLAGS = "";
@@ -466,13 +463,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mars/Mars-Prefix.pch";
 				INFOPLIST_FILE = "MarsTests/MarsTests-Info.plist";
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -482,13 +479,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mars/Mars-Prefix.pch";
 				INFOPLIST_FILE = "MarsTests/MarsTests-Info.plist";
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

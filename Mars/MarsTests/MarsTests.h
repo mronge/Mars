@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Central Atomics. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface MarsTests : SenTestCase
+@interface MarsTests : XCTestCase
 
 @end

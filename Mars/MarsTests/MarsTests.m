@@ -27,8 +27,8 @@
     
     MQuery *insert = [MQuery insertInto:@"emails" values:@{@"name":@"Matt", @"email":@"matt@gmail.com", @"count":@(3)}];
     int64_t r = [_conn executeUpdate:insert error:nil];
-    STAssertTrue(r > 0, nil);
-    STAssertTrue([_conn lastInsertRowId] == 1, nil);
+    XCTAssertTrue(r > 0);
+    XCTAssertTrue([_conn lastInsertRowId] == 1);
 }
 
 - (void)tearDown {
@@ -40,42 +40,42 @@
 - (void)testSelect {
     MQuery *query = [MQuery selectFrom:@"emails"];
     NSArray *results = [_conn executeQuery:query error:nil];
-    STAssertTrue(results.count > 0, nil);
-    STAssertEqualObjects(@"Matt", results[0][@"name"], nil);
+    XCTAssertTrue(results.count > 0);
+    XCTAssertEqualObjects(@"Matt", results[0][@"name"]);
 }
 
 - (void)testSelectCount {
-    STAssertTrue(1 == self.emailCount, nil);
+    XCTAssertTrue(1 == self.emailCount);
 }
 
 - (void)testDeleteCount {
     int64_t r = [_conn executeUpdate:self.deletionQuery error:nil];
-    STAssertTrue(r > 0, nil);
-    STAssertTrue(0 == self.emailCount, nil);
+    XCTAssertTrue(r > 0);
+    XCTAssertTrue(0 == self.emailCount);
 }
 
 - (void)testRollbackTransactions {
     BOOL success = [_conn beginTransaction:nil];
-    STAssertTrue(success, nil);
+    XCTAssertTrue(success);
 
     int64_t r = [_conn executeUpdate:self.deletionQuery error:nil];
-    STAssertTrue(r > 0, nil);
+    XCTAssertTrue(r > 0);
 
     success = [_conn rollback:nil];
-    STAssertTrue(success, nil);
-    STAssertTrue(1 == self.emailCount, @"Query was rolled back shouldn't have changed");
+    XCTAssertTrue(success);
+    XCTAssertTrue(1 == self.emailCount, @"Query was rolled back shouldn't have changed");
 }
 
 - (void)testCommitTransaction {
     BOOL success = [_conn beginTransaction:nil];
-    STAssertTrue(success, nil);
+    XCTAssertTrue(success);
 
     int64_t r = [_conn executeUpdate:self.deletionQuery error:nil];
-    STAssertTrue(r > 0, nil);
+    XCTAssertTrue(r > 0);
 
     success = [_conn commit:nil];
-    STAssertTrue(success, nil);
-    STAssertTrue(0 == self.emailCount, nil);
+    XCTAssertTrue(success);
+    XCTAssertTrue(0 == self.emailCount);
 }
 
 - (MQuery *)deletionQuery {
@@ -85,7 +85,7 @@
 - (int)emailCount {
     MQuery *query = [MQuery select:@"COUNT(*)" from:@"emails"];
     NSArray *results = [_conn executeQuery:query error:nil];
-    STAssertTrue(results.count > 0, nil);
+    XCTAssertTrue(results.count > 0);
     return [results[0][@"COUNT(*)"] intValue];
 }
 @end
