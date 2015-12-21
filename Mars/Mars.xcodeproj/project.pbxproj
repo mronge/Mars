@@ -7,11 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15256F7E1C29CB9400E56634 /* MDatabase.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F898883116DAF60100B5ED12 /* MDatabase.h */; };
+		15256F7F1C29CB9400E56634 /* MQuery.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F898884016DAF6E200B5ED12 /* MQuery.h */; };
+		15256F801C29CB9400E56634 /* MConnection.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F898883316DAF60200B5ED12 /* MConnection.h */; };
+		15256F811C29CB9400E56634 /* Mars.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F898880E16DAF59400B5ED12 /* Mars.h */; };
+		15256F821C29CB9400E56634 /* MSelectQuery.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F898884316DAFA5300B5ED12 /* MSelectQuery.h */; };
+		15256F831C29CB9400E56634 /* MInsertQuery.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F898885316DB156400B5ED12 /* MInsertQuery.h */; };
+		15256F841C29CB9400E56634 /* MUpdateQuery.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F8DE4AB216DB17AA00F5F426 /* MUpdateQuery.h */; };
+		15256F851C29CB9400E56634 /* MDeleteQuery.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F8DE4AB516DB1AB700F5F426 /* MDeleteQuery.h */; };
+		15256F861C29CB9400E56634 /* CTLogger.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F898883D16DAF67400B5ED12 /* CTLogger.h */; };
+		15256F871C29CB9400E56634 /* NSDictionary+Mars.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F898884716DAFF7F00B5ED12 /* NSDictionary+Mars.h */; };
+		15256F881C29CB9400E56634 /* MDatabase+AsyncAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C07ADE8ABA30C0CC9A8B33D7 /* MDatabase+AsyncAdditions.h */; };
 		C07AD390CA27F1FB3BF7C675 /* MDatabase+AsyncAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = C07ADE8ABA30C0CC9A8B33D7 /* MDatabase+AsyncAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C07ADA022259BBC98EBE16D5 /* MDatabase+AsyncAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C07ADB33DDA93701C9CD6E57 /* MDatabase+AsyncAdditions.m */; };
 		F898880A16DAF59400B5ED12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F898880916DAF59400B5ED12 /* Foundation.framework */; };
 		F898880F16DAF59400B5ED12 /* Mars.h in Headers */ = {isa = PBXBuildFile; fileRef = F898880E16DAF59400B5ED12 /* Mars.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F898881B16DAF59500B5ED12 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F898881A16DAF59500B5ED12 /* UIKit.framework */; };
 		F898881C16DAF59500B5ED12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F898880916DAF59400B5ED12 /* Foundation.framework */; };
 		F898881F16DAF59500B5ED12 /* libMars.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F898880616DAF59400B5ED12 /* libMars.a */; };
 		F898882516DAF59500B5ED12 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F898882316DAF59500B5ED12 /* InfoPlist.strings */; };
@@ -23,8 +33,6 @@
 		F898884516DAFA5300B5ED12 /* MSelectQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F898884416DAFA5300B5ED12 /* MSelectQuery.m */; };
 		F898884916DAFF7F00B5ED12 /* NSDictionary+Mars.m in Sources */ = {isa = PBXBuildFile; fileRef = F898884816DAFF7F00B5ED12 /* NSDictionary+Mars.m */; };
 		F898884F16DB0F1200B5ED12 /* QueryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F898884E16DB0F1200B5ED12 /* QueryTests.m */; };
-		F898885116DB11AB00B5ED12 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F898885016DB11AA00B5ED12 /* libsqlite3.dylib */; };
-		F898885216DB11B900B5ED12 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F898885016DB11AA00B5ED12 /* libsqlite3.dylib */; };
 		F898885516DB156500B5ED12 /* MInsertQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F898885416DB156400B5ED12 /* MInsertQuery.m */; };
 		F8DE4AB416DB17AA00F5F426 /* MUpdateQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DE4AB316DB17AA00F5F426 /* MUpdateQuery.m */; };
 		F8DE4AB716DB1AB700F5F426 /* MDeleteQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DE4AB616DB1AB700F5F426 /* MDeleteQuery.m */; };
@@ -48,6 +56,29 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		15256F7D1C29CB5A00E56634 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = ../../include/Mars;
+			dstSubfolderSpec = 16;
+			files = (
+				15256F7E1C29CB9400E56634 /* MDatabase.h in CopyFiles */,
+				15256F7F1C29CB9400E56634 /* MQuery.h in CopyFiles */,
+				15256F801C29CB9400E56634 /* MConnection.h in CopyFiles */,
+				15256F811C29CB9400E56634 /* Mars.h in CopyFiles */,
+				15256F821C29CB9400E56634 /* MSelectQuery.h in CopyFiles */,
+				15256F831C29CB9400E56634 /* MInsertQuery.h in CopyFiles */,
+				15256F841C29CB9400E56634 /* MUpdateQuery.h in CopyFiles */,
+				15256F851C29CB9400E56634 /* MDeleteQuery.h in CopyFiles */,
+				15256F861C29CB9400E56634 /* CTLogger.h in CopyFiles */,
+				15256F871C29CB9400E56634 /* NSDictionary+Mars.h in CopyFiles */,
+				15256F881C29CB9400E56634 /* MDatabase+AsyncAdditions.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		C07ADB33DDA93701C9CD6E57 /* MDatabase+AsyncAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MDatabase+AsyncAdditions.m"; sourceTree = "<group>"; };
 		C07ADDE8399B0B50FAE585D1 /* MDatabase+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MDatabase+Private.h"; sourceTree = "<group>"; };
@@ -57,7 +88,6 @@
 		F898880D16DAF59400B5ED12 /* Mars-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mars-Prefix.pch"; sourceTree = "<group>"; };
 		F898880E16DAF59400B5ED12 /* Mars.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mars.h; sourceTree = "<group>"; };
 		F898881716DAF59500B5ED12 /* MarsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F898881A16DAF59500B5ED12 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		F898882216DAF59500B5ED12 /* MarsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MarsTests-Info.plist"; sourceTree = "<group>"; };
 		F898882416DAF59500B5ED12 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F898882616DAF59500B5ED12 /* MarsTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarsTests.h; sourceTree = "<group>"; };
@@ -77,7 +107,6 @@
 		F898884C16DB045000B5ED12 /* MQuery+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MQuery+Private.h"; sourceTree = "<group>"; };
 		F898884D16DB0F1200B5ED12 /* QueryTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryTests.h; sourceTree = "<group>"; };
 		F898884E16DB0F1200B5ED12 /* QueryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryTests.m; sourceTree = "<group>"; };
-		F898885016DB11AA00B5ED12 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F898885316DB156400B5ED12 /* MInsertQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MInsertQuery.h; sourceTree = "<group>"; };
 		F898885416DB156400B5ED12 /* MInsertQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MInsertQuery.m; sourceTree = "<group>"; };
 		F8DE4AB216DB17AA00F5F426 /* MUpdateQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUpdateQuery.h; sourceTree = "<group>"; };
@@ -91,7 +120,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F898885116DB11AB00B5ED12 /* libsqlite3.dylib in Frameworks */,
 				F898880A16DAF59400B5ED12 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,8 +128,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F898885216DB11B900B5ED12 /* libsqlite3.dylib in Frameworks */,
-				F898881B16DAF59500B5ED12 /* UIKit.framework in Frameworks */,
 				F898881C16DAF59500B5ED12 /* Foundation.framework in Frameworks */,
 				F898881F16DAF59500B5ED12 /* libMars.a in Frameworks */,
 			);
@@ -113,7 +139,6 @@
 		F89887FD16DAF59400B5ED12 = {
 			isa = PBXGroup;
 			children = (
-				F898885016DB11AA00B5ED12 /* libsqlite3.dylib */,
 				F898880B16DAF59400B5ED12 /* Mars */,
 				F898882016DAF59500B5ED12 /* MarsTests */,
 				F898880816DAF59400B5ED12 /* Frameworks */,
@@ -134,7 +159,6 @@
 			isa = PBXGroup;
 			children = (
 				F898880916DAF59400B5ED12 /* Foundation.framework */,
-				F898881A16DAF59500B5ED12 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -237,6 +261,7 @@
 				F898880216DAF59400B5ED12 /* Sources */,
 				F898880316DAF59400B5ED12 /* Frameworks */,
 				F836F9CB16F01B55007DE438 /* Headers */,
+				15256F7D1C29CB5A00E56634 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -254,7 +279,6 @@
 				F898881216DAF59500B5ED12 /* Sources */,
 				F898881316DAF59500B5ED12 /* Frameworks */,
 				F898881416DAF59500B5ED12 /* Resources */,
-				F898881516DAF59500B5ED12 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -273,7 +297,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastTestingUpgradeCheck = 0720;
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Central Atomics";
 			};
 			buildConfigurationList = F898880116DAF59400B5ED12 /* Build configuration list for PBXProject "Mars" */;
@@ -304,22 +328,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		F898881516DAF59500B5ED12 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F898880216DAF59400B5ED12 /* Sources */ = {
@@ -383,6 +391,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -434,7 +443,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mars/Mars-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lsqlite3",
+				);
 				PRIVATE_HEADERS_FOLDER_PATH = ../../include/Mars/Private;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = ../../include/Mars;
@@ -449,7 +461,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mars/Mars-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lsqlite3",
+				);
 				PRIVATE_HEADERS_FOLDER_PATH = ../../include/Mars/Private;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = ../../include/Mars;
@@ -460,15 +475,15 @@
 		F898882F16DAF59500B5ED12 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mars/Mars-Prefix.pch";
 				INFOPLIST_FILE = "MarsTests/MarsTests-Info.plist";
-				OTHER_LDFLAGS = "-all_load";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-lsqlite3",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "centralatomics.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -476,15 +491,15 @@
 		F898883016DAF59500B5ED12 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mars/Mars-Prefix.pch";
 				INFOPLIST_FILE = "MarsTests/MarsTests-Info.plist";
-				OTHER_LDFLAGS = "-all_load";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-lsqlite3",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "centralatomics.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

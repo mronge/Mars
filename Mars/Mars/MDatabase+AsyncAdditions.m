@@ -13,7 +13,11 @@
 - (void)queries:(NSArray *)queries completionBlock:(void (^)(NSError *err, NSArray *results))completionBlock {
     __block int finished = 0;
     NSMutableArray *results = [NSMutableArray array];
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused"
     for (MQuery *query in queries) {
+#pragma clang diagnostic pop
         [results addObject:[NSNull null]]; // Acts as a placeholder
     }
 
