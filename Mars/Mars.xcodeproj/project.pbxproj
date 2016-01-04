@@ -16,7 +16,6 @@
 		15256F841C29CB9400E56634 /* MUpdateQuery.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F8DE4AB216DB17AA00F5F426 /* MUpdateQuery.h */; };
 		15256F851C29CB9400E56634 /* MDeleteQuery.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F8DE4AB516DB1AB700F5F426 /* MDeleteQuery.h */; };
 		15256F861C29CB9400E56634 /* CTLogger.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F898883D16DAF67400B5ED12 /* CTLogger.h */; };
-		15256F871C29CB9400E56634 /* NSDictionary+Mars.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F898884716DAFF7F00B5ED12 /* NSDictionary+Mars.h */; };
 		15256F881C29CB9400E56634 /* MDatabase+AsyncAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C07ADE8ABA30C0CC9A8B33D7 /* MDatabase+AsyncAdditions.h */; };
 		C07AD390CA27F1FB3BF7C675 /* MDatabase+AsyncAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = C07ADE8ABA30C0CC9A8B33D7 /* MDatabase+AsyncAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C07ADA022259BBC98EBE16D5 /* MDatabase+AsyncAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C07ADB33DDA93701C9CD6E57 /* MDatabase+AsyncAdditions.m */; };
@@ -59,7 +58,7 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		15256F7D1C29CB5A00E56634 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			dstPath = ../../include/Mars;
 			dstSubfolderSpec = 16;
 			files = (
@@ -72,10 +71,9 @@
 				15256F841C29CB9400E56634 /* MUpdateQuery.h in CopyFiles */,
 				15256F851C29CB9400E56634 /* MDeleteQuery.h in CopyFiles */,
 				15256F861C29CB9400E56634 /* CTLogger.h in CopyFiles */,
-				15256F871C29CB9400E56634 /* NSDictionary+Mars.h in CopyFiles */,
 				15256F881C29CB9400E56634 /* MDatabase+AsyncAdditions.h in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
