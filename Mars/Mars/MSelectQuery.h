@@ -17,4 +17,5 @@
 - (instancetype)limit:(NSUInteger)limit;
 - (instancetype)limit:(NSUInteger)limit offset:(NSUInteger)offset;
 - (instancetype)join:(NSString *)join;
+- (instancetype)groupBy:(NSString *)group;
 @end

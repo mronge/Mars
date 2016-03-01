@@ -15,6 +15,7 @@
 @property (nonatomic, assign) NSUInteger limit;
 @property (nonatomic, assign) NSUInteger offset;
 @property (nonatomic, strong) NSString *join;
+@property (nonatomic, strong) NSString *groupBy;
 @end
 
 @implementation MSelectQuery
@@ -29,6 +30,7 @@
     query.join = self.join;
     query.order = self.order;
     query.orderBy = self.orderBy;
+	query.groupBy = self.groupBy;
     return query;
 }
 
@@ -136,6 +138,14 @@
     MSelectQuery *query = [self copy];
     query.limit = limit;
     return query;
+}
+
+- (instancetype)groupBy:(NSString *)group
+{
+	MSelectQuery *query = [self copy];
+	query.groupBy = group;
+	
+	return query;
 }
 
 - (instancetype)limit:(NSUInteger)limit offset:(NSUInteger)offset {
