@@ -27,4 +27,7 @@
 
 // Blocking version
 - (id)query:(MQuery *)query error:(NSError **)err;
+
+- (id)rawQuery:(NSString *)query error:(NSError **)error;
+- (NSOperation *)rawQuery:(NSString *)query completionBlock:(void (^)(NSError *err, id result))completionBlock;
 @end

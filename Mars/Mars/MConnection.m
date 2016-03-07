@@ -92,6 +92,28 @@
     return results;
 }
 
+- (id)executeRawQuery:(NSString *)rawQuery error:(NSError **)error
+{
+
+#if LOG_SQL
+	NSLog(@"%@", rawQuery);
+#endif
+	sqlite3_stmt *stmt = [self createStatement:rawQuery bindings:nil error:error];
+	if (!stmt) {
+		return nil;
+	}
+	id results;
+	if ([[[rawQuery substringWithRange:NSMakeRange(0, 6)] uppercaseString] isEqualToString:@"SELECT"]) {
+		results = [self executeQueryWithStatement:stmt error:error];
+	} else {
+		// this is not a select query
+		[self executeUpdateWithStatement:stmt error:error];
+	}
+	
+	[self finalizeStatement:stmt];
+	return results;
+}
+
 - (BOOL)beginTransaction:(NSError **)error {
     return [self exec:@"BEGIN TRANSACTION" error:error];
 }

@@ -110,6 +110,46 @@
     }
 }
 
+- (id)rawQuery:(NSString *)query error:(NSError *__autoreleasing *)error
+{
+	dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+	__block NSError *err = nil;
+	__block id result = nil;
+	
+	[self rawQuery:query completionBlock:^(NSError *e, id r) {
+	
+		result = r;
+		err = e;
+		dispatch_semaphore_signal(semaphore);
+	}];
+	dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+	if (error) *error = err;
+	if (error) {
+		return nil;
+	} else {
+		return result;
+	}
+}
+
+- (NSOperation *)rawQuery:(NSString *)query completionBlock:(void (^)(NSError *err, id result))completionBlock
+{
+	__weak MDatabase *weakSelf = self;
+	NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
+		MDatabase *strongSelf = weakSelf;
+		MConnection *reader = [strongSelf reader];
+		NSError *error = nil;
+		NSArray *val = [reader executeRawQuery:query error:&error];
+		if (val) {
+			if (completionBlock) completionBlock(nil, val);
+		} else {
+			if (completionBlock) completionBlock(error, nil);
+		}
+		[self putBackReader:reader];
+	}];
+	[self.readQueue addOperation:op];
+	return op;
+}
+
 - (NSOperation *)select:(MQuery *)query completionBlock:(void (^)(NSError *err, id result))completionBlock {
     __weak MDatabase *weakSelf = self;
     NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
