@@ -123,7 +123,7 @@
 		dispatch_semaphore_signal(semaphore);
 	}];
 	dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-	if (err) *error = err;
+	if (error) *error = err;
 	if (err) {
 		return nil;
 	} else {
