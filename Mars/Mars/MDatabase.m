@@ -140,14 +140,10 @@
 		NSError *error = nil;
 		NSArray *val = [reader executeRawQuery:query error:&error];
 		if (val) {
-			[[NSOperationQueue mainQueue] addOperationWithBlock:^{
 				if (completionBlock) completionBlock(nil, val);
-			}];
 			
 		} else {
-			[[NSOperationQueue mainQueue] addOperationWithBlock:^{
 				if (completionBlock) completionBlock(error, nil);
-			}];
 			
 		}
 		[self putBackReader:reader];
