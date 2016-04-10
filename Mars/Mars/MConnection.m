@@ -11,6 +11,11 @@
 #import "MQuery+Private.h"
 #import "MSelectQuery.h"
 
+void myTraceFunc(void *uData, const char *statement)
+{
+	CTLog(@"%s", statement);
+}
+
 @implementation MConnection {
 	sqlite3 *_dbHandle;
 	NSString *_dbPath;
@@ -147,7 +152,8 @@
 			}
 			[results addObject:columns];
 		} else {
-			CTLog(@"Error calling sqlite3_step exec_query %@ - query (%@)", self.lastError, stmt);
+			CTLog(@"Error calling sqlite3_step exec_query %@", self.lastError);
+			sqlite3_trace(self.dbHandle, myTraceFunc, NULL);
 			if (error) {
 				*error = self.lastError;
 			}
@@ -164,7 +170,8 @@
 	} else if (rc == SQLITE_ROW) {
 		NSAssert(NO, @"A executeUpdate is being called with a query string");
 	} else {
-		CTLog(@"Error calling sqlite3_step exec_update_query %@ - query (%@)", self.lastError, stmt);
+		CTLog(@"Error calling sqlite3_step exec_update_query %@", self.lastError);
+		sqlite3_trace(self.dbHandle, myTraceFunc, NULL);
 		if (error) {
 			*error = self.lastError;
 		}
