@@ -13,7 +13,7 @@
 
 void myTraceFunc(void *uData, const char *statement)
 {
-	CTLog(@"%s", statement);
+	CTLog(@"TRACE: %s", statement);
 }
 
 @implementation MConnection {
@@ -152,7 +152,7 @@ void myTraceFunc(void *uData, const char *statement)
 			}
 			[results addObject:columns];
 		} else {
-			CTLog(@"Error calling sqlite3_step exec_query %@", self.lastError);
+			CTLog(@"Error %li calling sqlite3_step exec_query %@", r, self.lastError);
 			sqlite3_trace(self.dbHandle, myTraceFunc, NULL);
 			if (error) {
 				*error = self.lastError;
@@ -170,7 +170,7 @@ void myTraceFunc(void *uData, const char *statement)
 	} else if (rc == SQLITE_ROW) {
 		NSAssert(NO, @"A executeUpdate is being called with a query string");
 	} else {
-		CTLog(@"Error calling sqlite3_step exec_update_query %@", self.lastError);
+		CTLog(@"Error %li calling sqlite3_step exec_update_query %@", rc, self.lastError);
 		sqlite3_trace(self.dbHandle, myTraceFunc, NULL);
 		if (error) {
 			*error = self.lastError;
