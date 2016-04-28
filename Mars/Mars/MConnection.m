@@ -162,6 +162,12 @@ void myTraceFunc(void *uData, const char *statement)
 	return results;
 }
 
+- (id)executeRawQuery:(NSString *)rawQuery error:(NSError **)error
+{
+	// TODO: IMPROVE THIS
+	return nil;
+}
+
 - (BOOL)executeUpdateWithStatement:(sqlite3_stmt *)stmt error:(NSError **)error {
 	int rc = sqlite3_step(stmt);
 	

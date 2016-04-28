@@ -27,6 +27,7 @@
 - (BOOL)exec:(NSString *)sql error:(NSError **)error;
 - (int64_t)executeUpdate:(MQuery *)query error:(NSError **)error;
 - (NSArray *)executeQuery:(MQuery *)query error:(NSError **)error;
+- (id)executeRawQuery:(NSString *)rawQuery error:(NSError **)error;
 - (BOOL)beginTransaction:(NSError **)error;
 - (BOOL)commit:(NSError **)error;
 - (BOOL)rollback:(NSError **)error;
