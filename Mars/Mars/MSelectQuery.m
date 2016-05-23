@@ -16,6 +16,8 @@
 @property (nonatomic, assign) NSUInteger offset;
 @property (nonatomic, strong) NSString *join;
 @property (nonatomic, strong) NSString *groupBy;
+@property (nonatomic, strong) NSArray *whereRawArgs;
+@property (nonatomic, strong) NSString *whereRawExpr;
 @end
 
 @implementation MSelectQuery
@@ -31,6 +33,8 @@
     query.order = self.order;
     query.orderBy = self.orderBy;
 	query.groupBy = self.groupBy;
+	query.whereRawArgs = self.whereRawArgs;
+	query.whereRawExpr = self.whereRawExpr;
     return query;
 }
 
@@ -45,7 +49,7 @@
     }
     
     NSMutableString *str = nil;
-    if (self.where || self.join) {
+    if (self.where || self.whereRawExpr || self.join) {
         str = [NSMutableString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@", rowStr, [self tableString], [self whereString]];
     } else {
         str = [NSMutableString stringWithFormat:@"SELECT %@ FROM %@", rowStr, [self tableString]];
@@ -74,7 +78,9 @@
 
 - (NSString *)whereString {
     NSMutableString *where = [[super whereString] mutableCopy];
-    if (self.join && where.length > 0) {
+	if (self.whereRawExpr) {
+		return self.whereRawExpr;
+	} else if (self.join && where.length > 0) {
         [where appendFormat:@" AND %@", self.join];
     } else if (self.join && where.length == 0) {
         return self.join;
@@ -115,9 +121,23 @@
     return [NSString stringWithFormat:@"%@ AS %@", [self quote:table], [self quote:alias]];
 }
 
+- (NSArray *)bindings {
+	if (self.whereRawExpr) {
+		return self.whereRawArgs;
+	}
+	return [super bindings];
+}
+
 // Have to do this to get the compiler to stop complaining
 - (instancetype)where:(NSDictionary *)expressions {
     return (MSelectQuery *)[super where:expressions];
+}
+
+- (instancetype)whereRawSql:(NSString *)rawExpression args:(NSArray *)args {
+	MSelectQuery *query = [self copy];
+	query.whereRawArgs = args;
+	query.whereRawExpr = rawExpression;
+	return query;
 }
 
 - (instancetype)orderByAsc:(NSString *)field {
