@@ -43,6 +43,11 @@
     XCTAssertEqualObjects([query bindings], correctBindings);
 }
 
+- (void)testSelectWhereRawSqlQuery {
+	MSelectQuery *query = [[MQuery select:@[@"email"] from:@[@[@"accounts", @"a"]]] whereRawSql:@"a.email LIKE ?" args:@[@"test"]];
+	XCTAssertEqualObjects([query sql], @"SELECT \"email\" FROM \"accounts\" AS \"a\" WHERE a.email LIKE ?");
+}
+
 - (void)testSelectAsQuery {
     MSelectQuery *query = nil;
 

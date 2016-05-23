@@ -12,6 +12,7 @@
 
 @interface MSelectQuery : MQuery
 - (instancetype)where:(NSDictionary *)expressions;
+- (instancetype)whereRawSql:(NSString *)rawExpression args:(NSArray *)args;
 - (instancetype)orderByAsc:(NSString *)field;
 - (instancetype)orderByDesc:(NSString *)field;
 - (instancetype)limit:(NSUInteger)limit;
