@@ -48,6 +48,12 @@
 	XCTAssertEqualObjects([query sql], @"SELECT \"email\" FROM \"accounts\" AS \"a\" WHERE a.email LIKE ?");
 }
 
+- (void)testSelectWhereRawSqlJoinQuery {
+	NSArray *tables = @[@[@"emails", @"e"], @[@"address", @"a"]];
+	MQuery *query = [[[MQuery select:@[@"e.name", @"a.location"] from:tables] whereRawSql:@"e.to LIKE ?" args:@[@"matt%"]] join:@"a.id=e.address"];
+	XCTAssertEqualObjects([query sql], @"SELECT \"e\".\"name\", \"a\".\"location\" FROM \"emails\" AS \"e\", \"address\" AS \"a\" WHERE e.to LIKE ? AND a.id=e.address");
+}
+
 - (void)testSelectAsQuery {
     MSelectQuery *query = nil;
 
