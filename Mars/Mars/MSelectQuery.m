@@ -77,10 +77,14 @@
 }
 
 - (NSString *)whereString {
-    NSMutableString *where = [[super whereString] mutableCopy];
+	NSString *whereString;
 	if (self.whereRawExpr) {
-		return self.whereRawExpr;
-	} else if (self.join && where.length > 0) {
+		whereString = self.whereRawExpr;
+	} else {
+		whereString = [super whereString];
+	}
+    NSMutableString *where = [whereString mutableCopy];
+	if (self.join && where.length > 0) {
         [where appendFormat:@" AND %@", self.join];
     } else if (self.join && where.length == 0) {
         return self.join;
