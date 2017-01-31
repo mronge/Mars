@@ -68,17 +68,35 @@
 }
 
 - (NSOperation *)query:(MQuery *)query completionBlock:(void (^)(NSError *err, id result))completionBlock {
+    return [self query:query withCompletionOnMainThread:YES completionBlock:completionBlock];
+}
+
+- (NSOperation *)query:(MQuery *)query
+withCompletionOnMainThread:(BOOL)completionOnMainThread
+       completionBlock:(void (^)(NSError *err, id result))completionBlock {
     if ([query modifies]) {
         return [self change:query completionBlock:^(NSError *err, id result) {
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                if (completionBlock) completionBlock(err, result);
-            }];
+            if (completionBlock) {
+                if (completionOnMainThread) {
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        completionBlock(err, result);
+                    }];
+                } else {
+                    completionBlock(err, result);
+                }
+            }
         }];
     } else {
         return [self select:query completionBlock:^(NSError *err, id result) {
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                if (completionBlock) completionBlock(err, result);
-            }];
+            if (completionBlock) {
+                if (completionOnMainThread) {
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        completionBlock(err, result);
+                    }];
+                } else {
+                    completionBlock(err, result);
+                }
+            }
         }];
     }
 }
