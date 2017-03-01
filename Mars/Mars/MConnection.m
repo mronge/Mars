@@ -164,8 +164,16 @@ void myTraceFunc(void *uData, const char *statement)
 
 - (id)executeRawQuery:(NSString *)rawQuery error:(NSError **)error
 {
-	// TODO: IMPROVE THIS
-	return nil;
+	sqlite3_stmt *stmt = [self createStatement:rawQuery bindings:@[] error:error];
+	if (!stmt) {
+		*error = self.lastError;
+		CTLog(@"Error creating statement for raw query %@", self.lastError);
+		return nil;
+	}
+	NSArray *results = [self executeQueryWithStatement:stmt error:error];
+	[self finalizeStatement:stmt];
+	
+	return results;
 }
 
 - (BOOL)executeUpdateWithStatement:(sqlite3_stmt *)stmt error:(NSError **)error {
