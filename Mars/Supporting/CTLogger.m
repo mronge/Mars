@@ -8,6 +8,7 @@
 @implementation CTLogger {
     dispatch_queue_t queue;
     NSFileHandle *log;
+    NSDateFormatter *formatter;
 }
 
 + (id)logger {
@@ -43,6 +44,9 @@
 
         log = [NSFileHandle fileHandleForWritingAtPath:logPath];
         [log seekToEndOfFile];
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setTimeZone:[NSTimeZone systemTimeZone]];
+        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ssssZ"];
     }
     return self;
 }
@@ -51,7 +55,7 @@
     va_list args;
     va_start(args, format);
     NSString *msg = [[NSString alloc] initWithFormat:format arguments:args];
-    NSString *line = [NSString stringWithFormat:@"[%@] %@\n", [NSDate date], msg];
+    NSString *line = [NSString stringWithFormat:@"[%@] %@\n", [formatter stringFromDate:[NSDate date]], msg];
     va_end(args);
     dispatch_sync(queue, ^() {
         [log writeData:[line dataUsingEncoding:NSUTF8StringEncoding]];
